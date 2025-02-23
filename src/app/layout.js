@@ -1,15 +1,22 @@
-import localFont from "next/font/local";
+import { Roboto, Roboto_Mono } from 'next/font/google';
 import "./globals.css";
+import Header from '../components/layout/Header';
+import Footer from '../components/layout/Footer';  // Add this import
+import { AppProvider } from "@/components/AppContext";
+import { Toaster } from 'react-hot-toast';
 
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const roboto = Roboto({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto',
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+
+const robotoMono = Roboto_Mono({
+  weight: ['400', '500', '700'],
+  subsets: ['latin'],
+  display: 'swap',
+  variable: '--font-roboto-mono',
 });
 
 export const metadata = {
@@ -19,11 +26,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className='scroll-smooth'>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${roboto.variable} ${robotoMono.variable} antialiased`}
       >
-        {children}
+        <main className='max-w-4xl mx-auto p-4'>
+          <AppProvider>
+            <Toaster />
+            <Header />
+            {children}
+            <Footer />
+          </AppProvider>
+        </main>
       </body>
     </html>
   );

@@ -2,7 +2,7 @@ import mongoose from "mongoose";
 import { Order } from "@/models/Order";
 import authOptions from '@/app/api/auth/[...nextauth]/route';
 import { getServerSession } from "next-auth";
-import { isAdmin } from '../../../auth/[...nextauth]/authOptions';
+import { isAdmin } from '@/app/api/auth/[...nextauth]/route';
 
 
 export async function GET(req) {

@@ -1,8 +1,7 @@
 
 import {User} from "@/models/User";
 import mongoose from "mongoose";
-import { isAdmin } from '@/../api/auth/[...nextauth]/authOptions';
-
+import { isAdmin } from '@/app/api/auth/[...nextauth]/route';
 
 
 

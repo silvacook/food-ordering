@@ -1,4 +1,4 @@
-import { authOptions } from '../../api/auth/[...nextauth]/authOptions';
+import authOptions from '@/app/api/auth/[...nextauth]/authOptions';
 import { User } from "@/models/User";
 import { UserInfo } from "@/models/UserInfo";
 import mongoose from "mongoose";

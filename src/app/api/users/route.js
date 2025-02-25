@@ -1,7 +1,6 @@
 
 import {User} from "@/models/User";
 import mongoose from "mongoose";
-import { isAdmin } from "@/app/api/auth/[...nextauth]/route";
 
 
 export async function GET() {

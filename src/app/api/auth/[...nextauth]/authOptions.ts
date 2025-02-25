@@ -5,6 +5,7 @@ import { User } from '@/models/User';
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import type { SessionStrategy } from "next-auth";
 
 // Define authOptions with the appropriate providers and adapter
 export const authOptions = {
@@ -72,7 +73,7 @@ export const authOptions = {
         error: '/login'
     },
     session: {
-        strategy: "jwt"
+        strategy: "jwt" as SessionStrategy
     },
     callbacks: {
         async jwt({ token, user }) {

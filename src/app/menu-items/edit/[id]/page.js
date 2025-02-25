@@ -33,26 +33,28 @@ export default function EditMenuItemPage() {
   async function handleFormSubmit(ev, formData) {
     ev.preventDefault();
     const updatedData = { ...formData, _id: id };
-
+  
     const savingPromise = new Promise(async (resolve, reject) => {
       const response = await fetch("/api/menu-items", {
         method: "PUT",
         body: JSON.stringify(updatedData),
         headers: { "Content-Type": "application/json" },
       });
-
+  
       response.ok ? resolve() : reject();
     });
-
+  
     await toast.promise(savingPromise, {
       loading: "Saving this tasty item...",
       success: "Item saved successfully!",
       error: "Failed to save the item.",
     });
-
+  
+    // Update menuItem state after successful save
+    setMenuItem(updatedData);
+  
     setRedirectToItems(true);
   }
-
   async function handleDeleteClick() {
     const promise = new Promise(async (resolve, reject) => {
       const res = await fetch("/api/menu-items?_id=" + id, {

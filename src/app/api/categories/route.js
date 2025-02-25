@@ -1,7 +1,7 @@
 // src/app/api/categories/route.js
 import mongoose from "mongoose";
 import { Category } from "../../../models/Category";
-import { isAdmin } from "../../utils/auth"; // Import from the helper file
+import { isAdmin } from "../../../utils/auth"; // Import from the helper file
 
 export async function POST(req) {
   try {

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { authOptions, isAdmin } from "@/app/api/auth/[...nextauth]/route"; // Fixed import path
+import { authOptions, isAdmin } from "@/app/api/auth/[...nextauth]/route.js"; // Fixed import path
 import { Order } from "@/models/Order";
 import { getServerSession } from "next-auth";
 

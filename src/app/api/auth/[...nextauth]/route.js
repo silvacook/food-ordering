@@ -1,15 +1,15 @@
 import clientPromise from "@/libs/mongoConnect";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
-import { User } from "@/models/User";
-import { UserInfo } from "@/models/UserInfo";
+import { User } from '@/models/User';
+import {UserInfo} from "@/models/UserInfo";
 import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 // Define authOptions with the appropriate providers and adapter
-const authOptions = { // Removed export
+export const authOptions = {
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -18,14 +18,10 @@ const authOptions = { // Removed export
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      name: "Credentials",
-      id: "credentials",
+      name: 'Credentials',
+      id: 'credentials',
       credentials: {
-        email: {
-          label: "Email",
-          type: "email",
-          placeholder: "test@example.com",
-        },
+        email: { label: "Email", type: "email", placeholder: "test@example.com" },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -34,7 +30,7 @@ const authOptions = { // Removed export
 
         // Use mongoose.connect inside an async function to avoid issues
         await mongoose.connect(process.env.MONGO_URL);
-
+        
         const user = await User.findOne({ email });
         const passwordOk = user && bcrypt.compareSync(password, user.password);
 
@@ -43,13 +39,13 @@ const authOptions = { // Removed export
         }
 
         return null; // Return null if authorization fails
-      },
-    }),
+      }
+    })
   ],
 };
 
 // Function to check if the user is an admin
-async function isAdmin() {
+export async function isAdmin() {
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
   if (!userEmail) {

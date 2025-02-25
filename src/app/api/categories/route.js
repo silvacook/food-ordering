@@ -1,25 +1,7 @@
-// src/app/utils/auth.js
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "../api/auth/[...nextauth]/route";
-import { UserInfo } from "@/models/UserInfo";
-
-export async function isAdmin() {
-  const session = await getServerSession(authOptions);
-  const userEmail = session?.user?.email;
-  if (!userEmail) {
-    return false;
-  }
-  const userInfo = await UserInfo.findOne({ email: userEmail });
-  if (!userInfo) {
-    return false;
-  }
-  return userInfo.admin;
-}
-
 // src/app/api/categories/route.js
 import mongoose from "mongoose";
 import { Category } from "../../../models/Category";
-import { isAdmin } from "../../utils/auth";
+import { isAdmin } from "../../utils/auth"; // Import from the helper file
 
 export async function POST(req) {
   try {

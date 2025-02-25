@@ -63,8 +63,14 @@ export default function ProfilePage() {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
       });
-      if (response.ok) resolve();
-      else reject();
+      if (response.ok) {
+        // Update user state and localStorage after successful save
+        setUser(data); 
+        localStorage.setItem("userProfile", JSON.stringify(data));
+        resolve();
+      } else {
+        reject();
+      }
     });
 
     await toast.promise(savingPromise, {

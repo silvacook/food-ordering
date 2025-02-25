@@ -1,10 +1,16 @@
 import mongoose from "mongoose";
 import { Order } from "@/models/Order";
 import { isAdmin } from "../auth/[...nextauth]/route";
+import { getServerSession } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
 
 export async function GET(req) {
-    mongoose.connect(process.env.MONGO_URL);
-
+    await mongoose.connect(process.env.MONGO_URL);
+    
+    // Get the session first
+    const session = await getServerSession(authOptions);
+    
+    // Then call isAdmin - make sure this matches how isAdmin is implemented
     const admin = await isAdmin();
 
     const url = new URL(req.url);
@@ -17,10 +23,13 @@ export async function GET(req) {
         return Response.json(await Order.find());
     }
 
-    // Accessing user email from the request headers
-    const userEmail = req.headers.get('authorization'); 
+    // Get the email from the session instead of headers
+    const userEmail = session?.user?.email;
 
     if (userEmail) {
         return Response.json(await Order.find({userEmail}));
     }
+
+    // Return empty array if no session
+    return Response.json([]);
 }

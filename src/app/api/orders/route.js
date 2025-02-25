@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { isAdmin } from "../auth/[...nextauth]/route"; // Import isAdmin
 import { Order } from "@/models/Order";
 
 

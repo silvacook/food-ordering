@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-import { isAdmin } from "@/app/api/auth/[...nextauth]/route";
 import { Category } from "../../../models/Category";
 
 export async function POST(req) {

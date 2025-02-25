@@ -3,6 +3,7 @@ import { Order } from "@/models/Order";
 import { isAdmin } from "../../api/auth/[...nextauth]/route"
 import { getServerSession } from "next-auth";
 import { authOptions } from '../../api/auth/[...nextauth]/authOptions';
+
 export async function GET(req) {
     await mongoose.connect(process.env.MONGO_URL);
     

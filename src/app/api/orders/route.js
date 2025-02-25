@@ -1,13 +1,11 @@
 import mongoose from "mongoose";
-import { authOptions, isAdmin } from "../auth/[...nextauth]/route"; // Import authOptions and isAdmin
+import { isAdmin } from "../auth/[...nextauth]/route"; // Import isAdmin
 import { Order } from "@/models/Order";
-import { getServerSession } from "next-auth";
+
 
 export async function GET(req) {
     mongoose.connect(process.env.MONGO_URL);
 
-    const session = await getServerSession(authOptions);
-    const userEmail = session?.user?.email;
     const admin = await isAdmin();
 
     const url = new URL(req.url);
@@ -19,6 +17,9 @@ export async function GET(req) {
     if (admin) {
         return Response.json(await Order.find());
     }
+
+    // Accessing user email from the request headers
+    const userEmail = req.headers.get('authorization'); 
 
     if (userEmail) {
         return Response.json(await Order.find({userEmail}));

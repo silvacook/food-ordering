@@ -7,7 +7,7 @@ import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
-import { isAdmin } from "../auth/[...nextauth]/route"; // Import from the auth route file
+import { isAdmin } from "../auth/[...nextauth]/route.js"; // Import from the auth route file
 
 // Define authOptions with the appropriate providers and adapter
 export const authOptions = {

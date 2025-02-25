@@ -1,8 +1,8 @@
 import clientPromise from "@/libs/mongoConnect";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
-import { User } from '@/models/User';
-import {UserInfo} from "@/models/UserInfo";
+import { User } from "@/models/User";
+import { UserInfo } from "@/models/UserInfo";
 import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -18,10 +18,14 @@ export const authOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
     CredentialsProvider({
-      name: 'Credentials',
-      id: 'credentials',
+      name: "Credentials",
+      id: "credentials",
       credentials: {
-        email: { label: "Email", type: "email", placeholder: "test@example.com" },
+        email: {
+          label: "Email",
+          type: "email",
+          placeholder: "test@example.com",
+        },
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials, req) {
@@ -30,7 +34,7 @@ export const authOptions = {
 
         // Use mongoose.connect inside an async function to avoid issues
         await mongoose.connect(process.env.MONGO_URL);
-        
+
         const user = await User.findOne({ email });
         const passwordOk = user && bcrypt.compareSync(password, user.password);
 
@@ -39,13 +43,13 @@ export const authOptions = {
         }
 
         return null; // Return null if authorization fails
-      }
-    })
+      },
+    }),
   ],
 };
 
 // Function to check if the user is an admin
-export async function isAdmin() {
+async function isAdmin() {
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
   if (!userEmail) {

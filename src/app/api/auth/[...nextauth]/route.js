@@ -9,7 +9,7 @@ import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 // Define authOptions with the appropriate providers and adapter
-export const authOptions = {
+const authOptions = { // Removed export
   secret: process.env.SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [

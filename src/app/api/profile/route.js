@@ -1,4 +1,4 @@
-import { authOptions } from "@/lib/authOptions";
+import { authOptions } from "@/libs/authOptions";
 import { User } from "@/models/User";
 import { UserInfo } from "@/models/UserInfo";
 import mongoose from "mongoose";

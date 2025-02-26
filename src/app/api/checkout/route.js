@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/lib/authOptions"
+import { authOptions } from "@/libs/authOptions"
 import { MenuItem } from "@/models/MenuItem";
 import { Order } from "@/models/Order";
 import Stripe from 'stripe';

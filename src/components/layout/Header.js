@@ -6,6 +6,7 @@ import { useContext, useState } from "react";
 import ShoppingCart from "@/components/icons/ShoppingCart";
 import Bars2 from "@/components/icons/Bars2";
 import { CartContext } from "@/components/AppContext";
+import Image from "next/image";
 
 function AuthLinks({ status, userName }) {
   if (status === 'authenticated') {
@@ -56,8 +57,14 @@ export default function Header() {
     <header>
       {/* Mobile Header */}
       <div className="flex items-center md:hidden justify-between">
-        <Link className="text-orange-600 font-semibold text-2xl" href={'/'}>
-          ST PIZZA
+        <Link href="/" className="flex items-center">
+          <Image 
+            src="/logo-libe.png" 
+            alt="ST PIZZA Logo" 
+            width={120} 
+            height={50}
+            className="object-contain"
+          />
         </Link>
         <div className="flex gap-8 items-center">
           <Link href={'/cart'} className="relative">
@@ -92,8 +99,14 @@ export default function Header() {
       {/* Desktop Header */}
       <div className="hidden md:flex items-center justify-between">
         <nav className="flex items-center gap-8 text-gray-500 font-semibold">
-          <Link className="text-orange-600 font-semibold text-2xl" href={'/'}>
-            ST PIZZA
+          <Link href={'/'} className="flex items-center">
+            <Image 
+              src="/logo-libe.png" 
+              alt="ST PIZZA Logo" 
+              width={120} 
+              height={50}
+              className="object-contain"
+            />
           </Link>
           <Link href={'/'}>Home</Link>
           <Link href={'/menu'}>Menu</Link>

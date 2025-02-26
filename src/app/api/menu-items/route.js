@@ -1,6 +1,6 @@
 import mongoose from "mongoose";
 import { MenuItem } from "../../../models/MenuItem";
-import { isAdmin } from '@/app/api/auth/[...nextauth]/route';
+import { isAdmin } from "@/utils/auth";
 
 
 

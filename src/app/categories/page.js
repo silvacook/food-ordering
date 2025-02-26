@@ -1,81 +1,86 @@
 'use client';
-import UserTabs from "@/components/layout/UserTabs";
-import { useEffect, useState } from "react";
-import { useProfile } from "@/components/UseProfile";
 import DeleteButton from "@/components/DeleteButton";
+import UserTabs from "@/components/layout/UserTabs";
+import {useEffect, useState} from "react";
+import {useProfile} from "@/components/UseProfile";
 import toast from "react-hot-toast";
 
 export default function CategoriesPage() {
+
   const [categoryName, setCategoryName] = useState('');
   const [categories, setCategories] = useState([]);
-  const { loading: profileLoading, data: profileData } = useProfile();
+  const {loading:profileLoading, data:profileData} = useProfile();
   const [editedCategory, setEditedCategory] = useState(null);
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
-  async function fetchCategories() {
-    try {
-      const res = await fetch('/api/categories');
-      if (!res.ok) throw new Error("Failed to fetch categories");
-      
-      const data = await res.json();
-      setCategories(data);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
-      toast.error("Failed to fetch categories");
-    }
+  function fetchCategories() {
+    fetch('/api/categories').then(res => {
+      res.json().then(categories => {
+        setCategories(categories);
+      });
+    });
   }
 
   async function handleCategorySubmit(ev) {
     ev.preventDefault();
-    const data = { name: categoryName };
-    if (editedCategory) data._id = editedCategory._id;
-
-    const requestMethod = editedCategory ? 'PUT' : 'POST';
-
-    const creationPromise = fetch('/api/categories', {
-      method: requestMethod,
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Error processing category");
-        return response.json();
-      })
-      .then(() => {
-        setCategoryName('');
-        fetchCategories();
-        setEditedCategory(null);
+    const creationPromise = new Promise(async (resolve, reject) => {
+      const data = {name:categoryName};
+      if (editedCategory) {
+        data._id = editedCategory._id;
+      }
+      const response = await fetch('/api/categories', {
+        method: editedCategory ? 'PUT' : 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
       });
-
+      setCategoryName('');
+      fetchCategories();
+      setEditedCategory(null);
+      if (response.ok)
+        resolve();
+      else
+        reject();
+    });
     await toast.promise(creationPromise, {
-      loading: editedCategory ? 'Updating category...' : 'Creating your new category...',
+      loading: editedCategory
+                 ? 'Updating category...'
+                 : 'Creating your new category...',
       success: editedCategory ? 'Category updated' : 'Category created',
       error: 'Error, sorry...',
     });
   }
 
   async function handleDeleteClick(_id) {
-    const deletePromise = fetch(`/api/categories?_id=${_id}`, {
-      method: "DELETE",
-    })
-      .then((response) => {
-        if (!response.ok) throw new Error("Failed to delete category");
-        return response.json();
-      })
-      .then(() => fetchCategories());
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch('/api/categories?_id='+_id, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
 
-    await toast.promise(deletePromise, {
+    await toast.promise(promise, {
       loading: 'Deleting...',
       success: 'Deleted',
       error: 'Error',
     });
+
+    fetchCategories();
   }
 
-  if (profileLoading) return 'Loading user info...';
-  if (!profileData?.admin) return 'Not an admin';
+  if (profileLoading) {
+    return 'Loading user info...';
+  }
+
+  if (!profileData.admin) {
+    return 'Not an admin';
+  }
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
@@ -89,10 +94,9 @@ export default function CategoriesPage() {
                 <>: <b>{editedCategory.name}</b></>
               )}
             </label>
-            <input
-              type="text"
-              value={categoryName}
-              onChange={(ev) => setCategoryName(ev.target.value)}
+            <input type="text"
+                   value={categoryName}
+                   onChange={ev => setCategoryName(ev.target.value)}
             />
           </div>
           <div className="pb-2 flex gap-2">
@@ -104,8 +108,7 @@ export default function CategoriesPage() {
               onClick={() => {
                 setEditedCategory(null);
                 setCategoryName('');
-              }}
-            >
+              }}>
               Cancel
             </button>
           </div>
@@ -113,42 +116,28 @@ export default function CategoriesPage() {
       </form>
       <div>
         <h2 className="mt-8 text-sm text-gray-500">Existing categories</h2>
-        {categories?.length > 0 ? (
-          categories.map((c) => (
-            <div
-              key={c._id}
-              className="bg-gray-100 rounded-xl p-2 mb-1 relative flex items-center"
-            >
-              <div className="pl-4 grow">{c.name}</div>
-              <div className="flex gap-1 pr-1">
-                <button
-                  type="button"
-                  onClick={() => {
-                    setEditedCategory(c);
-                    setCategoryName(c.name);
-                  }}
-                  className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-1 rounded-md
-                    transform transition-all duration-200 hover:scale-105 
-                    active:scale-95 shadow-md hover:shadow-lg
-                    focus:outline-none focus:ring-2 focus:ring-blue-400 focus:ring-opacity-50"
-                >
-                  Edit
-                </button>
-                <button
-                  onClick={() => handleDeleteClick(c._id)}
-                  className="bg-white hover:bg-black text-black hover:text-white px-4 py-1 rounded-md
-                    transform transition-all duration-200 hover:scale-105 
-                    active:scale-95 shadow-md hover:shadow-lg border border-black
-                    focus:outline-none focus:ring-2 focus:ring-black focus:ring-opacity-50"
-                >
-                  Delete
-                </button>
-              </div>
+        {categories?.length > 0 && categories.map(c => (
+          <div
+            key={c._id}
+            className="bg-gray-100 rounded-xl p-2 px-4 flex gap-1 mb-1 items-center">
+            <div className="grow">
+              {c.name}
             </div>
-          ))
-        ) : (
-          <p className="text-gray-500">No categories found.</p>
-        )}
+            <div className="flex gap-1">
+              <button type="button"
+                      onClick={() => {
+                        setEditedCategory(c);
+                        setCategoryName(c.name);
+                      }}
+              >
+                Edit
+              </button>
+              <DeleteButton
+                label="Delete"
+                onDelete={() => handleDeleteClick(c._id)} />
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );

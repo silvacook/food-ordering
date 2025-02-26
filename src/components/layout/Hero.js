@@ -8,11 +8,11 @@ export default function Hero() {
         <section className="hero md:mt-4">
             <div className="py-8 md:py-12">
                 <h1 className="text-4xl font-semibold">
-                    Everything<br />
-                    is better <br /> 
-                    with a&nbsp; 
+                    Everything's<br />
+                    better with<br /> 
+                    a touch of&nbsp;
                     <span className="text-orange-600">
-                        Pizza
+                        Fragrance
                     </span>
                 </h1>
                 <p className="my-6 text-gray-500 text-sm">

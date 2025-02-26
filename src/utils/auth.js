@@ -1,14 +1,16 @@
 import { getServerSession } from "next-auth";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import { User } from "@/models/User";
-import mongoose from "mongoose";
+import { UserInfo } from "@/models/UserInfo";
+import { authOptions } from "@/libs/authOptions"
 
-export async function isAdmin(req) {
-  mongoose.connect(process.env.MONGO_URL);
-  
-  const session = await getServerSession(req, authOptions);
-  if (!session?.user?.email) return false;
-
-  const user = await User.findOne({ email: session.user.email });
-  return user?.role === "admin";
+export async function isAdmin() {
+    const session = await getServerSession(authOptions);
+    const userEmail = session?.user?.email;
+    if (!userEmail) {
+        return false;
+    }
+    const userInfo = await UserInfo.findOne({ email: userEmail });
+    if (!userInfo) {
+        return false;
+    }
+    return userInfo.admin;
 }

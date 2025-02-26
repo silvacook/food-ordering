@@ -26,49 +26,76 @@ export default function CategoriesPage() {
 
   async function handleCategorySubmit(ev) {
     ev.preventDefault();
+    
+    if (!categoryName.trim()) {
+      toast.error("Category name cannot be empty");
+      return;
+    }
+
     const creationPromise = new Promise(async (resolve, reject) => {
-      const data = {name:categoryName};
-      if (editedCategory) {
-        data._id = editedCategory._id;
+      try {
+        const data = {name: categoryName.trim()};
+        if (editedCategory) {
+          data._id = editedCategory._id;
+        }
+        
+        const response = await fetch('/api/categories', {
+          method: editedCategory ? 'PUT' : 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data),
+        });
+        
+        const responseData = await response.json();
+        
+        if (response.ok) {
+          setCategoryName('');
+          fetchCategories();
+          setEditedCategory(null);
+          resolve(responseData);
+        } else {
+          console.error('API error:', responseData);
+          reject(responseData.error || 'Something went wrong');
+        }
+      } catch (error) {
+        console.error('Request error:', error);
+        reject(error.message || 'Network error');
       }
-      const response = await fetch('/api/categories', {
-        method: editedCategory ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      });
-      setCategoryName('');
-      fetchCategories();
-      setEditedCategory(null);
-      if (response.ok)
-        resolve();
-      else
-        reject();
     });
+
     await toast.promise(creationPromise, {
       loading: editedCategory
                  ? 'Updating category...'
                  : 'Creating your new category...',
       success: editedCategory ? 'Category updated' : 'Category created',
-      error: 'Error, sorry...',
+      error: (err) => `Error: ${err}`,
     });
   }
 
   async function handleDeleteClick(_id) {
     const promise = new Promise(async (resolve, reject) => {
-      const response = await fetch('/api/categories?_id='+_id, {
-        method: 'DELETE',
-      });
-      if (response.ok) {
-        resolve();
-      } else {
-        reject();
+      try {
+        const response = await fetch('/api/categories?_id='+_id, {
+          method: 'DELETE',
+        });
+        
+        const responseData = await response.json();
+        
+        if (response.ok) {
+          resolve(responseData);
+        } else {
+          console.error('API error:', responseData);
+          reject(responseData.error || 'Something went wrong');
+        }
+      } catch (error) {
+        console.error('Request error:', error);
+        reject(error.message || 'Network error');
       }
     });
 
     await toast.promise(promise, {
       loading: 'Deleting...',
       success: 'Deleted',
-      error: 'Error',
+      error: (err) => `Error: ${err}`,
     });
 
     fetchCategories();
@@ -97,6 +124,7 @@ export default function CategoriesPage() {
             <input type="text"
                    value={categoryName}
                    onChange={ev => setCategoryName(ev.target.value)}
+                   placeholder="Category name"
             />
           </div>
           <div className="pb-2 flex gap-2">

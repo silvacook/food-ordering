@@ -1,4 +1,5 @@
-import { isAdmin } from "@/utils/auth";
+import { isAdmin } from "../auth/[...nextauth]/route"
+
 
 import {MenuItem} from "@/models/MenuItem";
 import mongoose from "mongoose";

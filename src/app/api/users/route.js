@@ -1,4 +1,4 @@
-import { isAdmin } from "@/utils/auth";
+import { isAdmin } from "../auth/[...nextauth]/route"
 import { User } from "@/models/User";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";

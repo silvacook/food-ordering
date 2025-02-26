@@ -1,43 +1,42 @@
 import mongoose from "mongoose";
-import MenuItem from "@/models/MenuItem"; // Ensure correct import
+import { MenuItem } from "../../../models/MenuItem";
 import { isAdmin } from "@/utils/auth";
 
+
+
 export async function POST(req) {
-    await mongoose.connect(process.env.MONGO_URL);
+    mongoose.connect(process.env.MONGO_URL);
     const data = await req.json();
-    
-    if (await isAdmin(req)) {
+    if(await isAdmin()) {
         const menuItemDoc = await MenuItem.create(data);
-        return new Response(JSON.stringify(menuItemDoc), { status: 201 });
+        return Response.json(menuItemDoc);
     } else {
-        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+        return Response.json({});
     }
 }
 
 export async function PUT(req) {
-    await mongoose.connect(process.env.MONGO_URL);
-    if (await isAdmin(req)) {
-        const { _id, ...data } = await req.json();
+    mongoose.connect(process.env.MONGO_URL);
+    if(await isAdmin()) {
+        const {_id, ...data} = await req.json();
         await MenuItem.findByIdAndUpdate(_id, data);
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
     }
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+    return Response.json(true);
 }
 
 export async function GET() {
-    await mongoose.connect(process.env.MONGO_URL);
-    const menuItems = await MenuItem.find();
-    return new Response(JSON.stringify(menuItems), { status: 200 });
+    mongoose.connect(process.env.MONGO_URL);
+        return Response.json(
+            await MenuItem.find()
+        );
 }
 
 export async function DELETE(req) {
-    await mongoose.connect(process.env.MONGO_URL);
+    mongoose.connect(process.env.MONGO_URL);
     const url = new URL(req.url);
     const _id = url.searchParams.get("_id");
-
-    if (await isAdmin(req)) {
-        await MenuItem.deleteOne({ _id });
-        return new Response(JSON.stringify({ success: true }), { status: 200 });
+    if (await isAdmin()) {
+        await MenuItem.deleteOne({_id});
     }
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
+    return Response.json(true);
 }

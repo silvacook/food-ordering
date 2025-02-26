@@ -1,7 +1,8 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",  // This specifies the base directory to resolve non-relative paths
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["src/*"]  // This maps '@/' to the 'src' directory
     }
   }
 }

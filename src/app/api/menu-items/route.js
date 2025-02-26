@@ -1,42 +1,43 @@
 import mongoose from "mongoose";
-import { MenuItem } from "../../../models/MenuItem";
+import MenuItem from "@/models/MenuItem"; // Ensure correct import
 import { isAdmin } from "@/utils/auth";
 
-
-
 export async function POST(req) {
-    mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect(process.env.MONGO_URL);
     const data = await req.json();
-    if(await isAdmin()) {
+    
+    if (await isAdmin(req)) {
         const menuItemDoc = await MenuItem.create(data);
-        return Response.json(menuItemDoc);
+        return new Response(JSON.stringify(menuItemDoc), { status: 201 });
     } else {
-        return Response.json({});
+        return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
     }
 }
 
 export async function PUT(req) {
-    mongoose.connect(process.env.MONGO_URL);
-    if(await isAdmin()) {
-        const {_id, ...data} = await req.json();
+    await mongoose.connect(process.env.MONGO_URL);
+    if (await isAdmin(req)) {
+        const { _id, ...data } = await req.json();
         await MenuItem.findByIdAndUpdate(_id, data);
+        return new Response(JSON.stringify({ success: true }), { status: 200 });
     }
-    return Response.json(true);
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
 }
 
 export async function GET() {
-    mongoose.connect(process.env.MONGO_URL);
-        return Response.json(
-            await MenuItem.find()
-        );
+    await mongoose.connect(process.env.MONGO_URL);
+    const menuItems = await MenuItem.find();
+    return new Response(JSON.stringify(menuItems), { status: 200 });
 }
 
 export async function DELETE(req) {
-    mongoose.connect(process.env.MONGO_URL);
+    await mongoose.connect(process.env.MONGO_URL);
     const url = new URL(req.url);
     const _id = url.searchParams.get("_id");
-    if (await isAdmin()) {
-        await MenuItem.deleteOne({_id});
+
+    if (await isAdmin(req)) {
+        await MenuItem.deleteOne({ _id });
+        return new Response(JSON.stringify({ success: true }), { status: 200 });
     }
-    return Response.json(true);
+    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 401 });
 }

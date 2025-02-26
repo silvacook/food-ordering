@@ -1,5 +1,7 @@
 import { isAdmin } from "@/utils/auth";
 import mongoose from "mongoose";
+import Category from "@/models/Category"; // Ensure the correct path
+
 
 export async function POST(req) {
   mongoose.connect(process.env.MONGO_URL);

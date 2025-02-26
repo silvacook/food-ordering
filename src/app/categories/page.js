@@ -15,32 +15,40 @@ export default function CategoriesPage() {
     fetchCategories();
   }, []);
 
-  function fetchCategories() {
-    fetch('/api/categories').then(res => {
-      res.json().then(categories => {
-        setCategories(categories);
-      });
-    });
+  async function fetchCategories() {
+    try {
+      const res = await fetch('/api/categories');
+      if (!res.ok) throw new Error("Failed to fetch categories");
+      
+      const data = await res.json();
+      setCategories(data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+      toast.error("Failed to fetch categories");
+    }
   }
 
   async function handleCategorySubmit(ev) {
     ev.preventDefault();
-    const creationPromise = new Promise(async (resolve, reject) => {
-      const data = { name: categoryName };
-      if (editedCategory) data._id = editedCategory._id;
+    const data = { name: categoryName };
+    if (editedCategory) data._id = editedCategory._id;
 
-      const response = await fetch('/api/categories', {
-        method: editedCategory ? 'PUT' : 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
+    const requestMethod = editedCategory ? 'PUT' : 'POST';
+
+    const creationPromise = fetch('/api/categories', {
+      method: requestMethod,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Error processing category");
+        return response.json();
+      })
+      .then(() => {
+        setCategoryName('');
+        fetchCategories();
+        setEditedCategory(null);
       });
-
-      setCategoryName('');
-      fetchCategories();
-      setEditedCategory(null);
-
-      response.ok ? resolve() : reject();
-    });
 
     await toast.promise(creationPromise, {
       loading: editedCategory ? 'Updating category...' : 'Creating your new category...',
@@ -50,28 +58,24 @@ export default function CategoriesPage() {
   }
 
   async function handleDeleteClick(_id) {
-    const promise = new Promise(async (resolve, reject) => {
-      const response = await fetch("/api/categories?_id="+_id, {
-        method: "DELETE",
-      });
-      if(response.ok) {
-        resolve();
-      } else {
-        reject();
-      }
-    });
+    const deletePromise = fetch(`/api/categories?_id=${_id}`, {
+      method: "DELETE",
+    })
+      .then((response) => {
+        if (!response.ok) throw new Error("Failed to delete category");
+        return response.json();
+      })
+      .then(() => fetchCategories());
 
-    await toast.promise(promise, {
+    await toast.promise(deletePromise, {
       loading: 'Deleting...',
       success: 'Deleted',
       error: 'Error',
     });
-
-    fetchCategories();
   }
 
   if (profileLoading) return 'Loading user info...';
-  if (!profileData.admin) return 'Not an admin';
+  if (!profileData?.admin) return 'Not an admin';
 
   return (
     <section className="mt-8 max-w-2xl mx-auto">
@@ -109,7 +113,7 @@ export default function CategoriesPage() {
       </form>
       <div>
         <h2 className="mt-8 text-sm text-gray-500">Existing categories</h2>
-        {categories?.length > 0 &&
+        {categories?.length > 0 ? (
           categories.map((c) => (
             <div
               key={c._id}
@@ -141,7 +145,10 @@ export default function CategoriesPage() {
                 </button>
               </div>
             </div>
-          ))}
+          ))
+        ) : (
+          <p className="text-gray-500">No categories found.</p>
+        )}
       </div>
     </section>
   );

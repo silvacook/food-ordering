@@ -1,4 +1,4 @@
-import { isAdmin } from "@/libs/auth"; 
+import { isAdmin } from "@/utils/auth"; 
 import { User } from "@/models/User";
 import mongoose from "mongoose";
 import { NextResponse } from "next/server";

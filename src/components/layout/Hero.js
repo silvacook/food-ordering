@@ -10,14 +10,14 @@ export default function Hero() {
             <h1 className="text-4xl font-semibold">
             Everything<br />
             is better <br /> 
-            with a&nbsp;
+            with&nbsp;
             <span className="text-orange-600">
                 Fragrance
             </span>
         </h1>
                 <p className="my-6 text-gray-500 text-sm">
-                    Pizza is the missing piece that makes everyday 
-                    complete, a simple yet delicious joy in life.
+                Indulge in scents that speak your truth. Our fragrances capture fleeting moments and 
+                transform them into ever-lasting memories.
                 </p>
                 <div className="flex gap-4 text-sm">
                     <button 

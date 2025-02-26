@@ -1,4 +1,4 @@
-import { mongooseConnect } from "@/lib/mongoose";
+import { mongooseConnect } from "@/libs/mongoConnect";
 import Category from "@/models/Category";
 import { isAdmin } from "@/utils/auth";
 

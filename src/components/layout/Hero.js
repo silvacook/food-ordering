@@ -7,14 +7,14 @@ export default function Hero() {
     return (
         <section className="hero md:mt-4">
             <div className="py-8 md:py-12">
-                <h1 className="text-4xl font-semibold">
-                    Everything's<br />
-                    better with<br /> 
-                    a touch of&nbsp;
-                    <span className="text-orange-600">
-                        Fragrance
-                    </span>
-                </h1>
+            <h1 className="text-4xl font-semibold">
+            Everything&apos;s<br />
+            better with<br /> 
+            a touch of&nbsp;
+            <span className="text-orange-600">
+                Fragrance
+            </span>
+        </h1>
                 <p className="my-6 text-gray-500 text-sm">
                     Pizza is the missing piece that makes everyday 
                     complete, a simple yet delicious joy in life.

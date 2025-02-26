@@ -1,52 +1,40 @@
-import { mongooseConnect } from "@/libs/mongoConnect"; // Import the mongooseConnect function
-import Category from "@/models/Category";
-import { isAdmin } from "@/utils/auth";
+import {isAdmin} from "@/app/api/auth/[...nextauth]/route";
+import {Category} from "@/models/Category";
+import mongoose from "mongoose";
 
-// Use the imported mongooseConnect function
 export async function POST(req) {
-  await mongooseConnect(); // No need to redefine mongooseConnect locally
-  const { name } = await req.json();
-  
+  mongoose.connect(process.env.MONGO_URL);
+  const {name} = await req.json();
   if (await isAdmin()) {
-    const categoryDoc = await Category.create({ name });
-    return new Response(JSON.stringify(categoryDoc), {
-      headers: { "Content-Type": "application/json" },
-    });
+    const categoryDoc = await Category.create({name});
+    return Response.json(categoryDoc);
   } else {
-    return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 403 });
+    return Response.json({});
   }
 }
 
 export async function PUT(req) {
-  await mongooseConnect();
-  const { _id, name } = await req.json();
-
+  mongoose.connect(process.env.MONGO_URL);
+  const {_id, name} = await req.json();
   if (await isAdmin()) {
-    await Category.updateOne({ _id }, { name });
-    return new Response(JSON.stringify({ success: true }));
+    await Category.updateOne({_id}, {name});
   }
-
-  return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 403 });
+  return Response.json(true);
 }
 
 export async function GET() {
-  await mongooseConnect();
-  const categories = await Category.find();
-
-  return new Response(JSON.stringify(categories), {
-    headers: { "Content-Type": "application/json" },
-  });
+  mongoose.connect(process.env.MONGO_URL);
+  return Response.json(
+    await Category.find()
+  );
 }
 
 export async function DELETE(req) {
-  await mongooseConnect();
+  mongoose.connect(process.env.MONGO_URL);
   const url = new URL(req.url);
-  const _id = url.searchParams.get("_id");
-
+  const _id = url.searchParams.get('_id');
   if (await isAdmin()) {
-    await Category.deleteOne({ _id });
-    return new Response(JSON.stringify({ success: true }));
+    await Category.deleteOne({_id});
   }
-
-  return new Response(JSON.stringify({ error: "Unauthorized" }), { status: 403 });
+  return Response.json(true);
 }

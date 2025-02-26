@@ -1,36 +1,28 @@
+import {authOptions, isAdmin} from "@/app/api/auth/[...nextauth]/route";
+import {Order} from "@/models/Order";
 import mongoose from "mongoose";
-import { Order } from "@/models/Order";
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
-import { getServerSession } from "next-auth";
-import { isAdmin } from "@/utils/auth";
-
+import {getServerSession} from "next-auth";
 
 export async function GET(req) {
-    await mongoose.connect(process.env.MONGO_URL);
-    
-    // Get the session first
-    const session = await getServerSession(authOptions);
-    
-    // Then call isAdmin - make sure this matches how isAdmin is implemented
-    const admin = await isAdmin();
+  mongoose.connect(process.env.MONGO_URL);
 
-    const url = new URL(req.url);
-    const _id = url.searchParams.get("_id");
-    if (_id) {
-        return Response.json(await Order.findById(_id));
-    }
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user?.email;
+  const admin = await isAdmin();
 
-    if (admin) {
-        return Response.json(await Order.find());
-    }
+  const url = new URL(req.url);
+  const _id = url.searchParams.get('_id');
+  if (_id) {
+    return Response.json( await Order.findById(_id) );
+  }
 
-    // Get the email from the session instead of headers
-    const userEmail = session?.user?.email;
 
-    if (userEmail) {
-        return Response.json(await Order.find({userEmail}));
-    }
+  if (admin) {
+    return Response.json( await Order.find() );
+  }
 
-    // Return empty array if no session
-    return Response.json([]);
+  if (userEmail) {
+    return Response.json( await Order.find({userEmail}) );
+  }
+
 }

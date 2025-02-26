@@ -1,4 +1,4 @@
-import { isAdmin } from "@/libs/auth"; 
+import { isAdmin } from "@/utils/auth"; 
 import {Category} from "@/models/Category";
 import mongoose from "mongoose";
 

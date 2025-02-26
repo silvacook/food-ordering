@@ -34,7 +34,7 @@
     "**/*.ts",
     "**/*.tsx",
     "src/app/api/auth/[...nextauth]/route.js"
-, ".next/types/app/api/auth/[...nextauth]/route.js", ".next/types/app/api/categories/route.js", "src/app/api/categories/route.js", "src/app/api/auth/[...nextauth]/authOptions.js", "src/libs/authOptions.js", "src/utils/auth.js", "src/app/api/menu-items/route.ts"  ],
+, ".next/types/app/api/auth/[...nextauth]/route.js", ".next/types/app/api/categories/route.js", "src/app/api/categories/route.js", "src/app/api/auth/[...nextauth]/authOptions.js", "src/libs/authOptions.js", "src/utils/auth.js", "src/app/api/menu-items/route.ts", "src/app/api/orders/route.js"  ],
   "exclude": [
     "node_modules"
   ]

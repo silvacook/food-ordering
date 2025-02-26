@@ -1,25 +1,10 @@
-import { mongooseConnect } from "@/libs/mongoConnect";
+import { mongooseConnect } from "@/libs/mongoConnect"; // Import the mongooseConnect function
 import Category from "@/models/Category";
 import { isAdmin } from "@/utils/auth";
 
-// Ensure the MongoDB connection is working
-async function mongooseConnect() {
-  if (mongoose.connection.readyState >= 1) {
-    console.log("Using existing MongoDB connection");
-    return;
-  }
-
-  try {
-    console.log("Connecting to MongoDB...");
-    await mongoose.connect(process.env.MONGO_URL);
-    console.log("MongoDB connected successfully");
-  } catch (error) {
-    console.error("MongoDB connection error:", error);
-  }
-}
-
+// Use the imported mongooseConnect function
 export async function POST(req) {
-  await mongooseConnect();
+  await mongooseConnect(); // No need to redefine mongooseConnect locally
   const { name } = await req.json();
   
   if (await isAdmin()) {

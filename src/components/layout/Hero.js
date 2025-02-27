@@ -11,7 +11,7 @@ export default function Hero() {
                     Everything&apos;s<br />
                     better with<br /> 
                     a touch of&nbsp;
-                    <span className="text-orange-600">
+                    <span className="text-[#9e473b]">
                         Fragrance
                     </span>
                 </h1>

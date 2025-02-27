@@ -33,7 +33,7 @@ export default function HomeMenu() {
                 <div className="absolute -left-[270px] -top-[420px] text-left -z-10 transform rotate-[-7deg]"> {/* Rotate slightly */}
                     <Image src='/viral.svg' width={770} height={835} alt='Viral 1' priority />
                 </div>
-                <div className="absolute -top-[450px] -right-[250px] -z-10 transform rotate-[4deg]"> {/* Rotate slightly in opposite direction */}
+                <div className="absolute -top-[450px] -right-[250px] -z-10 transform rotate-[2deg]"> {/* Rotate slightly in opposite direction */}
                     <Image src='/viral.svg' width={770} height={855} alt='Viral 2' priority />
                 </div>
             </div>

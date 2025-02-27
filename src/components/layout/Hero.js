@@ -33,9 +33,9 @@ export default function Hero() {
                     </button>
                 </div>
             </div>
-            <div className="relative hidden md:block w-full h-64"> {/* Parent div for the image */}
+            <div className="relative hidden md:block w-full h-96"> {/* Parent div for the image */}
                 <Image 
-                    src="/pizza.png" 
+                    src="/virals.svg" 
                     fill // Ensure your Next.js version supports this
                     style={{ objectFit: "contain" }} // Use objectFit for filling the parent
                     alt="Delicious Pizza" // Descriptive alt text

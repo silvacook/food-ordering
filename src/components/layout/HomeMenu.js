@@ -30,14 +30,14 @@ export default function HomeMenu() {
     return (
         <section className="">
             <div className="absolute left-0 right-0 w-full justify-start">
-                <div className="absolute left-0 -top-[70px] text-left -z-10">
-                    <Image src='/sallad1.png' width={109} height={189} alt='Sallad 1' priority />
+                <div className="absolute -left-[260px] -top-[450px] text-left -z-10 transform rotate-[-7deg]"> {/* Rotate slightly */}
+                    <Image src='/viral.svg' width={770} height={835} alt='Viral 1' priority />
                 </div>
-                <div className="absolute -top-[100px] right-0 -z-10">
-                    <Image src='/sallad2.png' width={107} height={195} alt='Sallad 2' priority />
+                <div className="absolute -top-[470px] -right-[250px] -z-10 transform rotate-[4deg]"> {/* Rotate slightly in opposite direction */}
+                    <Image src='/viral.svg' width={770} height={855} alt='Viral 2' priority />
                 </div>
             </div>
-            <div className="text-center mb-4">
+            <div className="text-center mb-4 pt-28">
                 <SectionHeaders subHeader='Check out' mainHeader='Our Best Sellers' />
             </div>
             <div className="grid sm:grid-cols-3 gap-4">

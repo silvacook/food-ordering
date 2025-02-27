@@ -5,7 +5,7 @@ export default function SectionHeaders({subHeader, mainHeader}) {
             leading-4">
             {subHeader}
             </h3>
-            <h2 className="text-orange-600 font-semibold text-4xl italic">
+            <h2 className="text-[#9e473b] font-semibold text-4xl italic">
             {mainHeader}
             </h2>
         </>

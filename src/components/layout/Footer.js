@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 const Footer = () => {
   return (
@@ -8,14 +9,17 @@ const Footer = () => {
           {/* Logo and slogan section */}
           <div className="lg:col-span-4 space-y-6">
             <Link href="/" className="inline-block">
-              {/* Replace with your actual logo */}
-              <div className="flex items-center space-x-2 text-orange-600 text-xl font-medium">
-                ST PIZZA
-              </div>
+              <Image 
+                          src="/logo-libe.png" 
+                          alt="ST PIZZA Logo" 
+                          width={120} 
+                          height={50}
+                          className="object-contain"
+                        />
             </Link>
             <p className="text-gray-600 leading-relaxed">
-              Empowering innovation through technology. We build solutions that
-              make a difference in people&#39;s lives.
+            Discover your signature scent affordably. Our 1ml glass spray vials deliver authentic, high-quality 
+            perfumes—perfect for trying before committing to full bottles. Experience luxury fragrances one spritz at a time.
             </p>
             {/* Social icons */}
             <div className="flex space-x-4">

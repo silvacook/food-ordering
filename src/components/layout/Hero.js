@@ -8,16 +8,16 @@ export default function Hero() {
         <section className="hero md:mt-4">
             <div className="py-8 md:py-12">
             <h1 className="text-4xl font-semibold">
-            Everything<br />
-            is better <br /> 
-            with&nbsp;
+            Everything's<br />
+            better with<br /> 
+            a touch of&nbsp;
             <span className="text-orange-600">
                 Fragrance
             </span>
         </h1>
                 <p className="my-6 text-gray-500 text-sm">
-                Indulge in scents that speak your truth. Our fragrances capture fleeting moments and 
-                transform them into ever-lasting memories.
+                Discover your signature scent affordably. Our 1ml glass spray vials deliver authentic, high-quality perfumes—perfect
+                 for trying before committing to full bottles. Experience luxury fragrances one spritz at a time.
                 </p>
                 <div className="flex gap-4 text-sm">
                     <button 

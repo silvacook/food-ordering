@@ -16,18 +16,15 @@ export default function Home() {
         <div className="text-gray-500 max-w-md mx-auto mt-4
         flex flex-col gap-4">  
           <p className="">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-          Etiam nec scelerisque neque. Donec tempus turpis quis euismod 
-          semper. In ultricies dapibus purus a accumsan. Vivamus at tellus 
-          faucibus, imperdiet
+          At our core, we believe in the art of fragrance discovery without the pressure of committing to a full bottle. The world of niche perfumes is vast and exciting, but buying full bottles without experiencing them first can often lead to disappointment. 
+          That&rsquo;s why we created a space where fragrance lovers can explore high-quality, authentic perfumes in convenient 1ml glass spray vials.
           </p>
           <p>
-          tincidunt felis. Fusce pharetra, est vel pellentesque maximus, 
-          ex velit vestibulum metus, et congue leo nisi id sem. Quisque 
-          faucibus scelerisque suscipit. Vivamus gravida efficitur 
+          Unlike others who offer decants, our goal is to provide just the right amount for a true scent experience—without overwhelming the senses or the budget. Our carefully curated collection ensures that every vial is a 
+          chance to discover something new and beautiful, making it easy to try a variety of scents before making any decisions.
           </p>
-          <p>Ut id mi pharetra, imperdiet tortor sit amet, pretium
-           arcu. Morbi tempus vel augue id lacinia. Mauris rutrum,
+          <p>
+            Join us on the journey to explore, enjoy, and find the fragrance that truly speaks to you.
            </p>
         </div>
       </section>

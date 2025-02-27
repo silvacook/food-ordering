@@ -7,21 +7,21 @@ export default function Hero() {
     return (
         <section className="hero md:mt-4">
             <div className="py-8 md:py-12">
-            <h1 className="text-4xl font-semibold">
-                Everything&apos;s<br />
-                better with<br /> 
-                a touch of&nbsp;
-                <span className="text-orange-600">
-                    Fragrance
-                </span>
-            </h1>
+                <h1 className="text-4xl font-semibold">
+                    Everything&apos;s<br />
+                    better with<br /> 
+                    a touch of&nbsp;
+                    <span className="text-orange-600">
+                        Fragrance
+                    </span>
+                </h1>
                 <p className="my-6 text-gray-500 text-sm">
-                Discover your signature scent affordably. Our 1ml glass spray vials deliver authentic, high-quality perfumes—perfect
-                 for trying before committing to full bottles. Experience luxury fragrances one spritz at a time.
+                    Discover your signature scent affordably. Our 1ml glass spray vials deliver authentic, high-quality perfumes—perfect
+                    for trying before committing to full bottles. Experience luxury fragrances one spritz at a time.
                 </p>
                 <div className="flex gap-4 text-sm">
                     <button 
-                        className="flex justify-center bg-orange-600 items-center gap-2 text-white px-4 
+                        className="flex justify-center bg-[#9e473b] items-center gap-2 text-white px-4 
                         py-2 rounded-full uppercase"
                     >
                         Order now
@@ -33,12 +33,12 @@ export default function Hero() {
                     </button>
                 </div>
             </div>
-            <div className="relative hidden md:block w-full h-96"> {/* Parent div for the image */}
+            <div className="relative hidden md:block w-full h-96">
                 <Image 
                     src="/virals.svg" 
-                    fill // Ensure your Next.js version supports this
-                    style={{ objectFit: "contain" }} // Use objectFit for filling the parent
-                    alt="Delicious Pizza" // Descriptive alt text
+                    fill
+                    style={{ objectFit: "contain" }}
+                    alt="Delicious Pizza"
                 />
             </div>
         </section>

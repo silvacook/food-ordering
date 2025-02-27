@@ -30,10 +30,10 @@ export default function HomeMenu() {
     return (
         <section className="">
             <div className="absolute left-0 right-0 w-full justify-start">
-                <div className="absolute -left-[260px] -top-[450px] text-left -z-10 transform rotate-[-7deg]"> {/* Rotate slightly */}
+                <div className="absolute -left-[280px] -top-[420px] text-left -z-10 transform rotate-[-7deg]"> {/* Rotate slightly */}
                     <Image src='/viral.svg' width={770} height={835} alt='Viral 1' priority />
                 </div>
-                <div className="absolute -top-[470px] -right-[250px] -z-10 transform rotate-[4deg]"> {/* Rotate slightly in opposite direction */}
+                <div className="absolute -top-[440px] -right-[250px] -z-10 transform rotate-[4deg]"> {/* Rotate slightly in opposite direction */}
                     <Image src='/viral.svg' width={770} height={855} alt='Viral 2' priority />
                 </div>
             </div>

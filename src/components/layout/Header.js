@@ -70,7 +70,7 @@ export default function Header() {
           <Link href={'/cart'} className="relative">
             <ShoppingCart />
             {cartProducts?.length > 0 && (
-              <span className="absolute -top-2 -right-2 bg-orange-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
+              <span className="absolute -top-2 -right-2 bg-[#9e473b] text-white text-xs w-5 h-5 flex items-center justify-center rounded-full">
                 {cartProducts.length}
               </span>
             )}

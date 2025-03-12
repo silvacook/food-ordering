@@ -8,7 +8,7 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import { MongoDBAdapter } from "@auth/mongodb-adapter"
 
-const authOptions = {
+export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
   providers: [
@@ -54,6 +54,6 @@ export async function isAdmin() {
   return userInfo.admin;
 }
 
-const handler = NextAuth(authOptions);
+const { handlers: { GET, POST } } = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
+export { GET, POST };

@@ -1,13 +1,20 @@
+// src/utils/admin.js
 import { getServerSession } from "next-auth";
-import { User } from "@/models/User";
+import { UserInfo } from "@/models/UserInfo";
 import mongoose from "mongoose";
+import { authOptions } from "@/app/api/auth/[...nextauth]/route";
 
-export async function isAdmin(req) {
-  await mongoose.connect(process.env.MONGO_URL);
+export async function isAdmin() {
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user?.email;
+  if (!userEmail) {
+    return false;
+  }
   
-  const session = await getServerSession(req);
-  if (!session?.user?.email) return false;
-
-  const user = await User.findOne({ email: session.user.email });
-  return user?.role === "admin";
+  await mongoose.connect(process.env.MONGO_URL);
+  const userInfo = await UserInfo.findOne({email: userEmail});
+  if (!userInfo) {
+    return false;
+  }
+  return userInfo.admin;
 }

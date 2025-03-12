@@ -1,4 +1,3 @@
-// src/lib/auth.js
 import { getServerSession } from "next-auth";
 import { User } from "@/models/User";
 import mongoose from "mongoose";

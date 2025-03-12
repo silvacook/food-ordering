@@ -3,11 +3,11 @@ import MenuItemTile from "@/components/menu/MenuItemTile";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import FlyingButton from "react-flying-item";
-import { toast } from "react-hot-toast"; // Import toast
+import { toast } from "react-hot-toast"; 
 
 export default function MenuItem(menuItem) {
     const {
-        image = '/path/to/default/image.png', // Default image
+        image = '/path/to/default/image.png', 
         name,
         description,
         basePrice,
@@ -38,11 +38,10 @@ export default function MenuItem(menuItem) {
         }
 
         if (addToCart) {
-            // Pass quantity to addToCart function
-            for (let i = 0; i < quantity; i++) {
-                addToCart(menuItem, selectedSize, selectedExtras);
-            }
-            toast.success(`${quantity} ${name} added to cart!`); // Updated toast message
+            // Instead of calling addToCart in a loop, pass the quantity directly
+            addToCart(menuItem, selectedSize, selectedExtras, quantity);
+            
+            toast.success(`${quantity} ${name} added to cart!`);
             await new Promise(resolve => setTimeout(resolve, 1000));
             setShowPopup(false);
             setQuantity(1); // Reset quantity after adding to cart

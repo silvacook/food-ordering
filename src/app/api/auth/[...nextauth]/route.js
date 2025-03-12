@@ -7,12 +7,12 @@ import { User } from "@/models/User";
 import bcrypt from "bcrypt";
 import mongoose from "mongoose";
 
-// Define NextAuth options only once
+// Define NextAuth options
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
   session: {
-    strategy: "jwt",  // Ensure that JWT session handling is used
+    strategy: "jwt", // Ensure that JWT session handling is used
   },
   providers: [
     // Google authentication provider
@@ -28,7 +28,7 @@ export const authOptions = {
         username: { label: "Email", type: "email", placeholder: "test@example.com" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials, req) {
+      async authorize(credentials) {
         // Check if credentials are provided
         if (!credentials?.email || !credentials?.password) return null;
 
@@ -51,18 +51,7 @@ export const authOptions = {
   ],
 };
 
-// Default NextAuth handler
 const handler = NextAuth(authOptions);
 
-// Export the handler for API routes
+// Default export for API route handler
 export { handler as GET, handler as POST };
-
-// Admin verification function
-export async function isAdmin(req) {
-  const session = await getServerSession(req);
-  if (!session?.user?.email) return false;
-
-  // Check if the user has admin role
-  const user = await User.findOne({ email: session.user.email });
-  return user?.role === "admin";
-}

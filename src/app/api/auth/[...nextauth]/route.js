@@ -1,57 +1,59 @@
-import NextAuth from "next-auth";
-import { MongoDBAdapter } from "@auth/mongodb-adapter";
+import clientPromise from "@/libs/mongoConnect";
+import {UserInfo} from "@/models/UserInfo";
+import bcrypt from "bcrypt";
+import * as mongoose from "mongoose";
+import {User} from '@/models/User';
+import NextAuth, {getServerSession} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import clientPromise from "@/libs/mongoConnect";
-import { User } from "@/models/User";
-import bcrypt from "bcrypt";
-import mongoose from "mongoose";
+import { MongoDBAdapter } from "@auth/mongodb-adapter"
 
-// Define NextAuth options
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
-  session: {
-    strategy: "jwt", // Ensure that JWT session handling is used
-  },
   providers: [
-    // Google authentication provider
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     }),
-    // Credentials authentication provider
     CredentialsProvider({
-      name: "Credentials",
-      id: "credentials",
+      name: 'Credentials',
+      id: 'credentials',
       credentials: {
         username: { label: "Email", type: "email", placeholder: "test@example.com" },
         password: { label: "Password", type: "password" },
       },
-      async authorize(credentials) {
-        // Check if credentials are provided
-        if (!credentials?.email || !credentials?.password) return null;
+      async authorize(credentials, req) {
+        const email = credentials?.email;
+        const password = credentials?.password;
 
-        // Connect to MongoDB if not already connected
-        if (mongoose.connection.readyState !== 1) {
-          await mongoose.connect(process.env.MONGO_URL);
+        mongoose.connect(process.env.MONGO_URL);
+        const user = await User.findOne({email});
+        const passwordOk = user && bcrypt.compareSync(password, user.password);
+
+        if (passwordOk) {
+          return user;
         }
 
-        // Find the user in the database
-        const user = await User.findOne({ email: credentials.email });
-        if (!user) return null;
-
-        // Compare passwords
-        const passwordOk = await bcrypt.compare(credentials.password, user.password);
-
-        // Return the user if credentials are valid, else null
-        return passwordOk ? user : null;
-      },
-    }),
+        return null
+      }
+    })
   ],
 };
 
+export async function isAdmin() {
+  const session = await getServerSession(authOptions);
+  const userEmail = session?.user?.email;
+  if (!userEmail) {
+    return false;
+  }
+  const userInfo = await UserInfo.findOne({email:userEmail});
+  if (!userInfo) {
+    return false;
+  }
+  return userInfo.admin;
+}
+
 const handler = NextAuth(authOptions);
 
-// Default export for API route handler
-export { handler as GET, handler as POST };
+export { handler as GET, handler as POST }

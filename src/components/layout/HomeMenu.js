@@ -29,14 +29,6 @@ export default function HomeMenu() {
 
     return (
         <section className="">
-            <div className="absolute left-0 right-0 w-full justify-start">
-                <div className="absolute -left-[260px] -top-[440px] text-left -z-10 transform rotate-[-7deg]"> {/* Rotate slightly */}
-                    <Image src='/viral.svg' width={770} height={835} alt='Viral 1' priority />
-                </div>
-                <div className="absolute -top-[465px] -right-[220px] -z-10 transform rotate-[2deg]"> {/* Rotate slightly in opposite direction */}
-                    <Image src='/viral.svg' width={770} height={855} alt='Viral 2' priority />
-                </div>
-            </div>
             <div className="text-center mb-4 pt-28">
                 <SectionHeaders subHeader='Check out' mainHeader='Our Best Sellers' />
             </div>

@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 export default function ContactPage() {
@@ -8,12 +9,14 @@ export default function ContactPage() {
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-20">
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Contact Us</h1>
-            <p className="text-xl md:text-2xl opacity-90">We'd love to hear from you</p>
+            <p className="text-xl md:text-2xl opacity-90">We&apos;d love to hear from you</p>
           </div>
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
           <Image 
-            src="/api/placeholder/400/300" 
+            src="/api/placeholder/400/300"
+            width={400}
+            height={300} 
             alt="Customer service representative" 
             className="rounded-lg shadow-xl"
           />
@@ -26,7 +29,7 @@ export default function ContactPage() {
           {/* Contact form */}
           <div>
             <h2 className="text-3xl font-semibold text-purple-800 mb-6">Send Us a Message</h2>
-            <p className="text-gray-600 mb-8">Have questions about our fragrances or need help finding your perfect scent? Fill out the form below and we'll get back to you as soon as possible.</p>
+            <p className="text-gray-600 mb-8">Have questions about our fragrances or need help finding your perfect scent? Fill out the form below and we&apos;ll get back to you as soon as possible.</p>
             
             <form className="space-y-6">
               <div>
@@ -146,7 +149,9 @@ export default function ContactPage() {
             <div className="mt-8 bg-gray-100 rounded-lg overflow-hidden shadow-md">
               <div className="bg-gray-200 h-64 flex items-center justify-center">
                 <Image 
-                  src="/api/placeholder/600/300" 
+                  src="/api/placeholder/600/300"
+                  width={600}
+                  height={300} 
                   alt="Office location map" 
                   className="w-full h-full object-cover"
                 />
@@ -162,7 +167,7 @@ export default function ContactPage() {
             {/* FAQ item 1 */}
             <div className="bg-white p-6 rounded-lg shadow-md">
               <h3 className="text-lg font-semibold text-purple-700 mb-2">How long will my sample vials last?</h3>
-              <p className="text-gray-700">Each 1ml vial contains approximately 10-12 sprays, enough to test a fragrance for several days and determine if it's right for you.</p>
+              <p className="text-gray-700">Each 1ml vial contains approximately 10-12 sprays, enough to test a fragrance for several days and determine if it&apos;s right for you.</p>
             </div>
             
             {/* FAQ item 2 */}

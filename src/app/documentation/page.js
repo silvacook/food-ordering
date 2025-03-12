@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Image from 'next/image';
 
 export default function DocumentationPage() {
   const [activeTab, setActiveTab] = useState('getting-started');
@@ -17,7 +18,9 @@ export default function DocumentationPage() {
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
           <Image 
-            src="/api/placeholder/400/300" 
+            src="/api/placeholder/400/300"
+            width={400}
+            height={300} 
             alt="Perfume documentation" 
             className="rounded-lg shadow-xl"
           />
@@ -88,7 +91,7 @@ export default function DocumentationPage() {
                   
                   <div className="prose max-w-none">
                     <p>
-                      Welcome to Olifia's USA Fragrances! Our 1ml glass spray vials are designed to help you explore the world of premium fragrances without committing to a full bottle. Here's how to get started on your fragrance journey.
+                      Welcome to Olifia&apos;s USA Fragrances! Our 1ml glass spray vials are designed to help you explore the world of premium fragrances without committing to a full bottle. Here&apos;s how to get started on your fragrance journey.
                     </p>
                     
                     <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-4">How Our Samples Work</h3>
@@ -105,11 +108,11 @@ export default function DocumentationPage() {
                     
                     <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-4">Finding Your Signature Scent</h3>
                     <p>
-                      We recommend starting with our "Discovery Sets" that group similar fragrances together. This allows you to compare similar scents and identify which notes you prefer.
+                      We recommend starting with our &quot;Discovery Sets&quot; that group similar fragrances together. This allows you to compare similar scents and identify which notes you prefer.
                     </p>
                     
                     <ol className="list-decimal pl-6 mt-4 space-y-2">
-                      <li>Begin by identifying fragrance families you're drawn to (floral, woody, citrus, etc.)</li>
+                      <li>Begin by identifying fragrance families you&apos;re drawn to (floral, woody, citrus, etc.)</li>
                       <li>Order samples from those families</li>
                       <li>Test each fragrance on your skin (not just the paper strip)</li>
                       <li>Pay attention to how the scent evolves over time</li>
@@ -118,7 +121,7 @@ export default function DocumentationPage() {
                     
                     <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-4">Sample to Full-Size Program</h3>
                     <p>
-                      Found a fragrance you love? Our "Sample Credit" program allows you to apply the cost of your sample toward the purchase of a full-sized bottle. Simply enter your sample order number during checkout to receive the discount.
+                      Found a fragrance you love? Our &quot;Sample Credit&quot; program allows you to apply the cost of your sample toward the purchase of a full-sized bottle. Simply enter your sample order number during checkout to receive the discount.
                     </p>
                   </div>
                   
@@ -213,7 +216,7 @@ export default function DocumentationPage() {
                     
                     <h3 className="text-xl font-semibold text-gray-800 mt-8 mb-4">Fragrance Families</h3>
                     <p>
-                      Fragrances are typically grouped into "families" based on their dominant characteristics. Here are the main fragrance families you'll encounter:
+                      Fragrances are typically grouped into &quot;families&quot; based on their dominant characteristics. Here are the main fragrance families you&apos;ll encounter:
                     </p>
                   </div>
                   
@@ -221,7 +224,7 @@ export default function DocumentationPage() {
                     <div className="bg-gray-50 p-6 rounded-lg">
                       <h3 className="font-semibold text-gray-800 text-lg mb-3">Floral</h3>
                       <p className="text-gray-600 mb-3">
-                        Based on flower scents like rose, jasmine, lily, etc. The most popular family, particularly for women's fragrances.
+                        Based on flower scents like rose, jasmine, lily, etc. The most popular family, particularly for women&apos;s fragrances.
                       </p>
                       <p className="text-gray-700 text-sm italic">
                         Example: Chanel No. 5, Marc Jacobs Daisy
@@ -244,7 +247,7 @@ export default function DocumentationPage() {
                         Based on warm woods like sandalwood, cedar, and vetiver. Often masculine, sophisticated scents.
                       </p>
                       <p className="text-gray-700 text-sm italic">
-                        Example: Terre d'Hermès, Jo Malone Wood Sage & Sea Salt
+                        Example: Terre d&apos;Hermès, Jo Malone Wood Sage & Sea Salt
                       </p>
                     </div>
                     
@@ -268,12 +271,14 @@ export default function DocumentationPage() {
                   
                   <div className="prose max-w-none">
                     <p>
-                      A fragrance doesn't smell the same throughout the day. Instead, it evolves in what perfumers call "notes" - different layers of scent that emerge as time passes.
+                      A fragrance doesn&apos;t smell the same throughout the day. Instead, it evolves in what perfumers call &quot;notes&quot; - different layers of scent that emerge as time passes.
                     </p>
                     
                     <div className="my-8">
                       <Image 
-                        src="/api/placeholder/700/300" 
+                        src="/api/placeholder/700/300"
+                        width={700}
+                        height={300} 
                         alt="Perfume notes pyramid" 
                         className="w-full rounded-lg shadow-md"
                       />
@@ -285,7 +290,7 @@ export default function DocumentationPage() {
                       <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-gray-800">
                         <h4 className="font-semibold text-gray-800 text-lg mb-2">Top Notes (Head Notes)</h4>
                         <p className="text-gray-700 mb-3">
-                          These are the first scents you smell when applying a fragrance, but they typically last only 15-30 minutes. They're usually light, fresh, and immediately appealing.
+                          These are the first scents you smell when applying a fragrance, but they typically last only 15-30 minutes. They&apos;re usually light, fresh, and immediately appealing.
                         </p>
                         <p className="text-gray-600 text-sm">
                           <strong>Common top notes:</strong> Citrus (lemon, bergamot, orange), light fruits, herbs
@@ -295,7 +300,7 @@ export default function DocumentationPage() {
                       <div className="bg-gray-50 p-6 rounded-lg border-l-4 border-gray-600">
                         <h4 className="font-semibold text-gray-800 text-lg mb-2">Middle Notes (Heart Notes)</h4>
                         <p className="text-gray-700 mb-3">
-                          These emerge as the top notes fade and typically last 2-4 hours. They form the "heart" of the fragrance and its main character.
+                          These emerge as the top notes fade and typically last 2-4 hours. They form the &quot;heart&quot; of the fragrance and its main character.
                         </p>
                         <p className="text-gray-600 text-sm">
                           <strong>Common middle notes:</strong> Floral scents (rose, jasmine), spices (cinnamon, cardamom), fruit, green notes

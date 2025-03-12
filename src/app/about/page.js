@@ -14,7 +14,9 @@ export default function AboutPage() {
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
           <Image 
-            src="/api/placeholder/400/300" 
+            src="/api/placeholder/400/300"
+            width={20}
+                height={20}  
             alt="Collection of fragrance vials" 
             className="rounded-lg shadow-xl"
           />
@@ -40,7 +42,9 @@ export default function AboutPage() {
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
             <Image 
-              src="/api/placeholder/500/300" 
+              src="/api/placeholder/500/300"
+              width={20}
+                height={20}  
               alt="Our founder with fragrance collection" 
               className="w-full rounded-md"
             />
@@ -93,7 +97,9 @@ export default function AboutPage() {
             {/* Team member 1 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <Image 
-                src="/api/placeholder/300/300" 
+                src="/api/placeholder/300/300"
+                width={20}
+                height={20}  
                 alt="Team member" 
                 className="w-full h-64 object-cover"
               />
@@ -107,7 +113,9 @@ export default function AboutPage() {
             {/* Team member 2 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <Image 
-                src="/api/placeholder/300/300" 
+                src="/api/placeholder/300/300"
+                width={20}
+                height={20}  
                 alt="Team member" 
                 className="w-full h-64 object-cover"
               />
@@ -121,12 +129,14 @@ export default function AboutPage() {
             {/* Team member 3 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
               <Image
-                src="/api/placeholder/300/300" 
+                src="/api/placeholder/300/300"
+                width={20}
+                height={20} 
                 alt="Team member" 
                 className="w-full h-64 object-cover"
               />
               <div className="p-6">
-                <h3 className="text-xl font-bold text-amber-700">Summer Sky Macias</h3>
+                <h3 className="text-xl font-bold text-amber-700">Summer S. Macias</h3>
                 <p className="text-gray-500 mb-4">Customer Experience Manager</p>
                 <p className="text-gray-700">Dedicated to ensuring every customer finds their signature scent with personalized recommendations.</p>
               </div>

@@ -14,7 +14,9 @@ export default function CareersPage() {
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
           <Image 
-            src="/api/placeholder/400/300" 
+            src="/api/placeholder/400/300"
+            width={20}
+                height={20}
             alt="Team member working with fragrances" 
             className="rounded-lg shadow-xl"
           />

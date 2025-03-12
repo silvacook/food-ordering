@@ -18,7 +18,16 @@ export default function MenuItem(menuItem) {
     const [selectedSize, setSelectedSize] = useState(sizes.length > 0 ? sizes[0] : null);
     const [selectedExtras, setSelectedExtras] = useState([]);
     const [showPopup, setShowPopup] = useState(false);
+    const [quantity, setQuantity] = useState(1);
     const { addToCart } = useContext(CartContext);
+
+    function increaseQuantity() {
+        setQuantity(prev => prev + 1);
+    }
+
+    function decreaseQuantity() {
+        setQuantity(prev => (prev > 1 ? prev - 1 : 1));
+    }
 
     async function handleAddToCartButtonClick() {
         const hasOptions = sizes.length > 0 || extraIngredientPrices.length > 0;
@@ -29,10 +38,14 @@ export default function MenuItem(menuItem) {
         }
 
         if (addToCart) {
-            addToCart(menuItem, selectedSize, selectedExtras);
-            toast.success(`${name} added to cart!`); // Add toast success message
+            // Pass quantity to addToCart function
+            for (let i = 0; i < quantity; i++) {
+                addToCart(menuItem, selectedSize, selectedExtras);
+            }
+            toast.success(`${quantity} ${name} added to cart!`); // Updated toast message
             await new Promise(resolve => setTimeout(resolve, 1000));
             setShowPopup(false);
+            setQuantity(1); // Reset quantity after adding to cart
         } else {
             console.error("addToCart function is not available");
         }
@@ -56,6 +69,9 @@ export default function MenuItem(menuItem) {
             selectedPrice += extra.price || 0;
         }
     }
+
+    // Calculate total price based on quantity
+    const totalPrice = (selectedPrice * quantity).toFixed(2);
 
     return (
         <>
@@ -96,9 +112,32 @@ export default function MenuItem(menuItem) {
                                     ))}
                                 </div>
                             )}
+                            
+                            {/* Quantity Selection UI */}
+                            <div className="py-2">
+                                <h3 className="text-center text-gray-700">Quantity</h3>
+                                <div className="flex items-center justify-center gap-2 mt-2">
+                                    <button 
+                                        type="button" 
+                                        onClick={decreaseQuantity}
+                                        className="bg-gray-200 px-3 py-1 rounded-full text-md font-bold hover:bg-gray-300 transition-colors"
+                                    >
+                                        -
+                                    </button>
+                                    <span className="text-xl w-8 text-center">{quantity}</span>
+                                    <button 
+                                        type="button" 
+                                        onClick={increaseQuantity}
+                                        className="bg-[#9e473b] px-3 py-1 rounded-full text-md font-bold hover:bg-[#c95b4d] transition-colors"
+                                    >
+                                        +
+                                    </button>
+                                </div>
+                            </div>
+
                             <FlyingButton targetTop={'5%'} targetLeft={'65%'} src={image}>
                                 <div className="primary sticky bottom-2" onClick={handleAddToCartButtonClick}>
-                                    Add to cart ${selectedPrice}
+                                    Add to cart ${totalPrice}
                                 </div>
                             </FlyingButton>
                             <button className="mt-2" onClick={() => setShowPopup(false)}>Cancel</button>

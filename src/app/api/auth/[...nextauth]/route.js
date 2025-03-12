@@ -54,6 +54,6 @@ export async function isAdmin() {
   return userInfo.admin;
 }
 
-const { handlers: { GET, POST } } = NextAuth(authOptions);
+const handler = NextAuth(authOptions);
 
-export { GET, POST };
+export { handler as GET, handler as POST }

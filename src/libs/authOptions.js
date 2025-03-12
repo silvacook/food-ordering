@@ -10,9 +10,6 @@ import mongoose from "mongoose";
 export const authOptions = {  // ✅ Keep only this definition
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
-  session: {
-    strategy: "jwt", // ✅ Add this line to enforce JWT session handling
-  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,

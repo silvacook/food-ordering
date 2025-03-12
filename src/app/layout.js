@@ -22,6 +22,9 @@ const robotoMono = Roboto_Mono({
 export const metadata = {
   title: "Olfiausa",
   description: "Everything better with a touch of Fragrance",
+  icons: {
+    icon: '/logo-libe.png'
+  }
 };
 
 export default function RootLayout({ children }) {

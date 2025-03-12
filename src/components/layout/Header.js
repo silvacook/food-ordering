@@ -109,7 +109,7 @@ export default function Header() {
             />
           </Link>
           <Link href={'/'}>Home</Link>
-          <Link href={'/menu'}>Menu</Link>
+          <Link href={'/menu'}>All Fragrances</Link>
           <Link href={'/#about'}>About</Link>
           <Link href={'/#contact'}>Contact</Link>
         </nav>

@@ -1,12 +1,12 @@
 import clientPromise from "@/libs/mongoConnect";
-import {UserInfo} from "@/models/UserInfo";
+import { UserInfo } from "@/models/UserInfo";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
-import {User} from '@/models/User';
-import NextAuth, {getServerSession} from "next-auth";
+import { User } from '@/models/User';
+import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -28,32 +28,45 @@ export const authOptions = {
         const password = credentials?.password;
 
         mongoose.connect(process.env.MONGO_URL);
-        const user = await User.findOne({email});
+        const user = await User.findOne({ email });
         const passwordOk = user && bcrypt.compareSync(password, user.password);
 
         if (passwordOk) {
           return user;
         }
 
-        return null
-      }
-    })
+        return null;
+      },
+    }),
   ],
+  callbacks: {
+    async session(session, user) {
+      // Check if user exists and add the `isAdmin` flag to the session.
+      const userEmail = session.user?.email;
+      if (userEmail) {
+        const userInfo = await UserInfo.findOne({ email: userEmail });
+        if (userInfo) {
+          session.user.isAdmin = userInfo.admin;
+        } else {
+          session.user.isAdmin = false;
+        }
+      }
+      return session;
+    },
+  },
 };
 
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
+
+// Separate helper function to check if the user is admin (if needed elsewhere)
 export async function isAdmin() {
   const session = await getServerSession(authOptions);
   const userEmail = session?.user?.email;
   if (!userEmail) {
     return false;
   }
-  const userInfo = await UserInfo.findOne({email:userEmail});
-  if (!userInfo) {
-    return false;
-  }
-  return userInfo.admin;
+  const userInfo = await UserInfo.findOne({ email: userEmail });
+  return userInfo ? userInfo.admin : false;
 }
-
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST }

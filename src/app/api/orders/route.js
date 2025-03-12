@@ -1,4 +1,4 @@
-import {authOptions, isAdmin } from '@/lib/auth';
+import {authOptions, isAdmin } from '@/libs/auth';
 import {Order} from "@/models/Order";
 import mongoose from "mongoose";
 import {getServerSession} from "next-auth";

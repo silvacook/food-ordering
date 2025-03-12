@@ -145,7 +145,7 @@ export default function ContactPage() {
             {/* Map placeholder */}
             <div className="mt-8 bg-gray-100 rounded-lg overflow-hidden shadow-md">
               <div className="bg-gray-200 h-64 flex items-center justify-center">
-                <img 
+                <Image 
                   src="/api/placeholder/600/300" 
                   alt="Office location map" 
                   className="w-full h-full object-cover"

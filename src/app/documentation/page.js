@@ -16,7 +16,7 @@ export default function DocumentationPage() {
           </div>
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
-          <img 
+          <Image 
             src="/api/placeholder/400/300" 
             alt="Perfume documentation" 
             className="rounded-lg shadow-xl"
@@ -272,7 +272,7 @@ export default function DocumentationPage() {
                     </p>
                     
                     <div className="my-8">
-                      <img 
+                      <Image 
                         src="/api/placeholder/700/300" 
                         alt="Perfume notes pyramid" 
                         className="w-full rounded-lg shadow-md"

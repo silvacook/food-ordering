@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React from 'react';
 
 export default function AboutPage() {
@@ -38,7 +39,7 @@ export default function AboutPage() {
             </div>
           </div>
           <div className="bg-white p-6 rounded-lg shadow-lg">
-            <img 
+            <Image 
               src="/api/placeholder/500/300" 
               alt="Our founder with fragrance collection" 
               className="w-full rounded-md"
@@ -91,7 +92,7 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8">
             {/* Team member 1 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img 
+              <Image 
                 src="/api/placeholder/300/300" 
                 alt="Team member" 
                 className="w-full h-64 object-cover"
@@ -105,7 +106,7 @@ export default function AboutPage() {
 
             {/* Team member 2 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img 
+              <Image 
                 src="/api/placeholder/300/300" 
                 alt="Team member" 
                 className="w-full h-64 object-cover"
@@ -119,7 +120,7 @@ export default function AboutPage() {
 
             {/* Team member 3 */}
             <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <img 
+              <Image
                 src="/api/placeholder/300/300" 
                 alt="Team member" 
                 className="w-full h-64 object-cover"

@@ -9,7 +9,7 @@ export default function AboutPage() {
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-24">
           <div className="md:w-2/3">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">About Us</h1>
-            <p className="text-xl md:text-2xl opacity-90">Discover the story behind Olifia's USA Fragrances</p>
+            <p className="text-xl md:text-2xl opacity-90">Discover the story behind Olifia&apos;s USA Fragrances</p>
           </div>
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
@@ -28,7 +28,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-semibold text-amber-800 mb-6">Our Story</h2>
             <div className="prose lg:prose-xl">
               <p className="text-gray-700">
-                Welcome to Olifia's USA Fragrances. We're dedicated to bringing you authentic, high-quality perfumes in convenient 1ml glass spray vials.
+                Welcome to Olifia&apos;s USA Fragrances. We&apos;re dedicated to bringing you authentic, high-quality perfumes in convenient 1ml glass spray vials.
               </p>
               <p className="text-gray-700">
                 Our mission is to help you discover your signature scent without committing to a full bottle. We believe everyone deserves to experience luxury fragrances one spritz at a time.
@@ -144,7 +144,7 @@ export default function AboutPage() {
                 <span className="text-white font-bold">1</span>
               </div>
               <h3 className="text-xl font-bold text-amber-700 mb-2">2020: The Beginning</h3>
-              <p className="text-gray-700">Olifia's USA Fragrances was founded with a simple goal: make luxury fragrances accessible to everyone.</p>
+              <p className="text-gray-700">Olifia&apos;s USA Fragrances was founded with a simple goal: make luxury fragrances accessible to everyone.</p>
             </div>
 
             {/* Timeline item 2 */}
@@ -173,7 +173,7 @@ export default function AboutPage() {
             <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-amber-400 mb-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
             </svg>
-            <p className="text-xl italic text-gray-700 mb-6">"Olifia's has completely changed how I shop for fragrances. I've discovered scents I never would have tried otherwise, without wasting money on full bottles I don't love."</p>
+            <p className="text-xl italic text-gray-700 mb-6">&quot;Olifia&apos;s has completely changed how I shop for fragrances. I&apos;ve discovered scents I never would have tried otherwise, without wasting money on full bottles I don&apos;t love.&quot;</p>
             <div>
               <h4 className="font-bold text-amber-800">Rebecca Johnson</h4>
               <p className="text-gray-600">Loyal Customer Since 2021</p>
@@ -186,7 +186,7 @@ export default function AboutPage() {
       <div className="bg-amber-700 text-white">
         <div className="max-w-6xl mx-auto px-4 py-12 text-center">
           <h2 className="text-3xl font-bold mb-4">Want to Know More?</h2>
-          <p className="text-xl opacity-90 mb-8">We'd love to hear from you and answer any questions</p>
+          <p className="text-xl opacity-90 mb-8">We&apos;d love to hear from you and answer any questions</p>
           <button className="bg-white text-amber-700 hover:bg-amber-50 py-3 px-8 rounded-md font-semibold text-lg transition-colors">
             Contact Us
           </button>

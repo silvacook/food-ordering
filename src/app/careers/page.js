@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function CareersPage() {
   return (
@@ -26,7 +27,7 @@ export default function CareersPage() {
           <h2 className="text-3xl font-semibold text-blue-800 mb-6">Join Our Journey</h2>
           
           <p className="text-gray-700">
-            Welcome to Olifia's USA Fragrances. We're dedicated to bringing you authentic, high-quality perfumes in convenient 1ml glass spray vials.
+            Welcome to Olifia&apos;s USA Fragrances. We&apos;re dedicated to bringing you authentic, high-quality perfumes in convenient 1ml glass spray vials.
           </p>
           
           <p className="text-gray-700">
@@ -70,7 +71,7 @@ export default function CareersPage() {
           <div className="bg-gray-50 p-6 rounded-lg my-8 border border-gray-200">
             <h3 className="text-2xl font-semibold text-blue-800 mb-4">Our Company Culture</h3>
             <p className="text-gray-700">
-              At Olifia's USA Fragrances, we foster a creative, collaborative environment where ideas flourish and innovation is encouraged. We believe in work-life balance and celebrating each team member's unique contributions.
+              At Olifia&apos;s USA Fragrances, we foster a creative, collaborative environment where ideas flourish and innovation is encouraged. We believe in work-life balance and celebrating each team member&apos;s unique contributions.
             </p>
           </div>
         </div>

@@ -13,7 +13,7 @@ export default function AboutPage() {
           </div>
         </div>
         <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
-          <img 
+          <Image 
             src="/api/placeholder/400/300" 
             alt="Collection of fragrance vials" 
             className="rounded-lg shadow-xl"

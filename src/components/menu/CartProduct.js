@@ -3,10 +3,6 @@ import Trash from "@/components/icons/Trash";
 import Image from "next/image";
 
 export default function CartProduct({product, onRemove, index, quantity}) {
-    const handleQuantityDecrease = () => {
-        onRemove(index);
-    };
-    
     return (
         <div className="flex items-center gap-4 border-b py-4">
             <div className="w-24">
@@ -27,35 +23,27 @@ export default function CartProduct({product, onRemove, index, quantity}) {
             <div className="grow">
                 <h3 className="font-semibold">
                     {product.name}
-                    {quantity > 1 && (
-                        <span className="text-gray-500 ml-2 text-lg">×{quantity}</span>
-                    )}
                 </h3>
                 
+                {quantity > 1 && (
+                    <div className="text-sm font-bold text-gray-600 mt-1">
+                        x{quantity}
+                    </div>
+                )}
+                
                 {product.size && (
-                    <div className="text-sm">
+                    <div className="text-sm mt-1">
                         Size: <span>{product.size.name}</span>
                     </div>
                 )}
                 
                 {product.extras?.length > 0 && (
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 mt-1">
                         {product.extras.map((extra, extraIndex) => (
                             <div key={extraIndex}>
                                 {extra.name} +${extra.price}
                             </div>
                         ))}
-                    </div>
-                )}
-                
-                {quantity > 1 && (
-                    <div className="mt-2 flex items-center">
-                        <button 
-                            onClick={handleQuantityDecrease}
-                            className="px-2 py-1 bg-gray-100 rounded-md text-sm hover:bg-gray-300 transition duration-200"
-                        >
-                            Lower quantity
-                        </button>
                     </div>
                 )}
             </div>

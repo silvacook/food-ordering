@@ -40,6 +40,9 @@ export default function CartPage() {
         subtotal += cartProductPrice(p);
     }
 
+    // Delivery fee is now $5.99
+    const deliveryFee = 5.99;
+
     function handleAddressChange(propName, value) {
         setAddress(prevAddress => ({
             ...prevAddress,
@@ -102,7 +105,8 @@ export default function CartPage() {
                             key={index}
                             index={index}
                             product={product} 
-                            onRemove={removeCartProduct} 
+                            onRemove={removeCartProduct}
+                            quantity={product.quantity || 1}
                         />
                     ))}
 
@@ -113,9 +117,9 @@ export default function CartPage() {
                             Total:
                         </div>
                         <div className="text-lg font-semibold pl-2 text-right">
-                            ${subtotal}<br />
-                            $5<br />
-                            ${subtotal + 5}
+                            ${subtotal.toFixed(2)}<br />
+                            ${deliveryFee.toFixed(2)}<br />
+                            ${(subtotal + deliveryFee).toFixed(2)}
                         </div>
                     </div>
                 </div>
@@ -131,7 +135,7 @@ export default function CartPage() {
                             type="submit"
                             className="bg-orange-500 text-white w-full py-2 px-4 rounded-md mt-4 font-semibold"
                         >
-                            Pay ${subtotal+5}
+                            Pay ${(subtotal + deliveryFee).toFixed(2)}
                         </button>
                     </form>
                 </div>

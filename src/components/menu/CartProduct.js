@@ -7,38 +7,39 @@ export default function CartProduct({product, onRemove, index, quantity}) {
         <div className="flex items-center gap-4 border-b py-4">
             <div className="w-24">
                 {product.image ? (
-                    <Image
-                        width={240}
-                        height={240}
-                        src={product.image || "/default-image.png"}
-                        alt={product.name || "Product Image"}
+                    <Image 
+                        src={product.image} 
+                        alt={product.name} 
+                        width={240} 
+                        height={240} 
+                        className="w-full h-auto" 
                     />
                 ) : (
-                    <div className="w-24 h-24 bg-gray-200 flex items-center justify-center">
+                    <div className="bg-gray-200 p-4 rounded w-full h-24 flex items-center justify-center text-gray-500 text-sm">
                         No Image Available
                     </div>
                 )}
             </div>
             
-            <div className="grow">
-                <h3 className="font-semibold">
+            <div className="flex-grow">
+                <div className="font-semibold">
                     {product.name}
-                </h3>
+                </div>
                 
                 {quantity > 1 && (
-                    <div className="text-sm font-bold text-gray-600 mt-1">
-                        x{quantity}
+                    <div className="text-sm font-normal text-gray-500">
+                        Quantity: <span className="font-bold">x{quantity}</span>
                     </div>
                 )}
                 
                 {product.size && (
-                    <div className="text-sm mt-1">
-                        Size: <span>{product.size.name}</span>
+                    <div className="text-sm text-gray-500">
+                        Size: {product.size.name}
                     </div>
                 )}
                 
                 {product.extras?.length > 0 && (
-                    <div className="text-sm text-gray-500 mt-1">
+                    <div className="text-sm text-gray-500">
                         {product.extras.map((extra, extraIndex) => (
                             <div key={extraIndex}>
                                 {extra.name} +${extra.price}
@@ -48,19 +49,17 @@ export default function CartProduct({product, onRemove, index, quantity}) {
                 )}
             </div>
             
-            <div className="text-lg font-semibold">
+            <div className="font-semibold">
                 ${cartProductPrice(product)}
             </div>
+            
             {!!onRemove && (
-                <div className="ml-2">
-                    <button
-                        type="button"
-                        onClick={() => onRemove(index)}
-                        className="p-2"
-                    >
-                        <Trash />
-                    </button>
-                </div>
+                <button 
+                    onClick={() => onRemove(index)}
+                    className="p-2"
+                >
+                    <Trash />
+                </button>
             )}
         </div>
     );

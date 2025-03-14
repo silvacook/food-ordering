@@ -2,8 +2,11 @@
 
 import Image from "next/image";
 import Right from "../icons/Right";
+import { useRouter } from "next/navigation";
 
 export default function Hero() {
+    const router = useRouter();
+    
     return (
         <section className="hero md:mt-4">
             <div className="py-8 md:py-12">
@@ -19,15 +22,19 @@ export default function Hero() {
                     Discover your signature scent affordably. Our 1ml glass spray vials deliver authentic, high-quality perfumes—perfect
                     for trying before committing to full bottles. Experience luxury fragrances one spritz at a time.
                 </p>
-                <div className="flex gap-4 text-sm">
+                <div className="flex gap-4 text-sm items-center">
                     <button 
+                        onClick={() => router.push('/menu')}
                         className="flex justify-center bg-[#9e473b] items-center gap-2 text-white px-4 
-                        py-2 rounded-full uppercase"
+                        py-1.5 rounded-full uppercase"
                     >
                         Order now
                         <Right />
                     </button>
-                    <button className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold">
+                    <button 
+                        onClick={() => router.push('/about')}
+                        className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold"
+                    >
                         Learn more
                         <Right />
                     </button>

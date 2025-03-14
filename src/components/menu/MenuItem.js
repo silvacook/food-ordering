@@ -3,7 +3,8 @@ import MenuItemTile from "@/components/menu/MenuItemTile";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import FlyingButton from "react-flying-item";
-import { toast } from "react-hot-toast"; 
+// Remove the toast import as we'll use the one from AppContext
+// import { toast } from "react-hot-toast"; 
 
 export default function MenuItem(menuItem) {
     const {
@@ -38,10 +39,12 @@ export default function MenuItem(menuItem) {
         }
 
         if (addToCart) {
-            // Instead of calling addToCart in a loop, pass the quantity directly
+            // Call addToCart with quantity - this will show toast from AppContext
             addToCart(menuItem, selectedSize, selectedExtras, quantity);
             
-            toast.success(`${quantity} ${name} added to cart!`);
+            // Remove the toast.success call here to avoid duplicate toasts
+            // toast.success(`${quantity} ${name} added to cart!`);
+            
             await new Promise(resolve => setTimeout(resolve, 1000));
             setShowPopup(false);
             setQuantity(1); // Reset quantity after adding to cart

@@ -3,8 +3,6 @@ import MenuItemTile from "@/components/menu/MenuItemTile";
 import Image from "next/image";
 import { useContext, useState } from "react";
 import FlyingButton from "react-flying-item";
-// Remove the toast import as we'll use the one from AppContext
-// import { toast } from "react-hot-toast"; 
 
 export default function MenuItem(menuItem) {
     const {
@@ -39,12 +37,7 @@ export default function MenuItem(menuItem) {
         }
 
         if (addToCart) {
-            // Call addToCart with quantity - this will show toast from AppContext
             addToCart(menuItem, selectedSize, selectedExtras, quantity);
-            
-            // Remove the toast.success call here to avoid duplicate toasts
-            // toast.success(`${quantity} ${name} added to cart!`);
-            
             await new Promise(resolve => setTimeout(resolve, 1000));
             setShowPopup(false);
             setQuantity(1); // Reset quantity after adding to cart
@@ -79,8 +72,8 @@ export default function MenuItem(menuItem) {
         <>
             {showPopup && (
                 <div onClick={() => setShowPopup(false)} className="fixed inset-0 bg-black/80 flex items-center justify-center">
-                    <div onClick={ev => ev.stopPropagation()} className="my-8 bg-white p-2 rounded-lg max-w-md">
-                        <div className="overflow-y-scroll p-2" style={{ maxHeight: 'calc(100vh - 100px)' }}>
+                    <div onClick={ev => ev.stopPropagation()} className="my-8 bg-white p-4 rounded-lg max-w-md">
+                        <div className="overflow-y-scroll pr-1" style={{ maxHeight: 'calc(100vh - 100px)' }}>
                             <Image src={image} alt={name} width={300} height={200} className="mx-auto" />
                             <h2 className="text-lg font-bold text-center mb-2">{name}</h2>
                             <p className="text-center text-gray-500 text-sm mb-2">{description}</p>
@@ -115,34 +108,45 @@ export default function MenuItem(menuItem) {
                                 </div>
                             )}
                             
-                            {/* Quantity Selection UI */}
+                            {/* Enhanced Quantity Selection UI */}
                             <div className="py-2">
-                                <h3 className="text-center text-gray-700">Quantity</h3>
-                                <div className="flex items-center justify-center gap-2 mt-2">
+                                <h3 className="text-center text-gray-700 font-bold mb-2">Quantity</h3>
+                                <div className="flex items-center justify-center gap-4 mt-2">
                                     <button 
                                         type="button" 
                                         onClick={decreaseQuantity}
-                                        className="bg-gray-200 px-3 py-1 rounded-full text-md font-bold hover:bg-gray-300 transition-colors"
+                                        className="bg-red-500 text-white w-8 h-8 rounded-full text-lg font-bold hover:bg-red-600 transition-colors shadow-md flex items-center justify-center"
                                     >
                                         -
                                     </button>
-                                    <span className="text-xl w-8 text-center">{quantity}</span>
+                                    <span className="text-xl w-8 text-center font-bold">{quantity}</span>
                                     <button 
                                         type="button" 
                                         onClick={increaseQuantity}
-                                        className="bg-[#9e473b] px-3 py-1 rounded-full text-md font-bold hover:bg-[#c95b4d] transition-colors"
+                                        className="bg-green-500 text-white w-8 h-8 rounded-full text-lg font-bold hover:bg-green-600 transition-colors shadow-md flex items-center justify-center"
                                     >
                                         +
                                     </button>
                                 </div>
                             </div>
 
-                            <FlyingButton targetTop={'5%'} targetLeft={'65%'} src={image}>
-                                <div className="primary sticky bottom-2" onClick={handleAddToCartButtonClick}>
-                                    Add to cart ${totalPrice}
-                                </div>
-                            </FlyingButton>
-                            <button className="mt-2" onClick={() => setShowPopup(false)}>Cancel</button>
+                            {/* Fixed button container with no extra padding */}
+                            <div className="mt-4 pb-2">
+                                <FlyingButton targetTop={'5%'} targetLeft={'65%'} src={image}>
+                                    <button 
+                                        className="w-full bg-[#9e473b] text-white px-6 py-3 rounded-full font-bold text-center hover:bg-[#c95b4d] transition-colors shadow-md"
+                                        onClick={handleAddToCartButtonClick}
+                                    >
+                                        Add to cart ${totalPrice}
+                                    </button>
+                                </FlyingButton>
+                                <button 
+                                    className="w-full mt-1 text-red-800 hover:text-red-800 py-2 border border-red-800 rounded-full" 
+                                    onClick={() => setShowPopup(false)}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

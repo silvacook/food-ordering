@@ -141,7 +141,7 @@ export default function MenuItem(menuItem) {
                                     </button>
                                 </FlyingButton>
                                 <button 
-                                    className="w-full mt-1 text-red-800 hover:text-red-800 py-2 border border-red-800 rounded-full" 
+                                    className="w-full mt-1 text-gray-600 hover:text-gray-700 py-2 border border-red-500 rounded-full" 
                                     onClick={() => setShowPopup(false)}
                                 >
                                     Cancel

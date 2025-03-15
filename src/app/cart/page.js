@@ -113,7 +113,7 @@ export default function CartPage() {
                     <div className="py-4 flex justify-end items-center pr-4">
                         <div className="text-gray-500">
                             Subtotal:<br />
-                            Shipping Fee:<br />
+                            Shipping:<br />
                             Total:
                         </div>
                         <div className="text-lg font-semibold pl-2 text-right">

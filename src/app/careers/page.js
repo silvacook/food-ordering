@@ -12,10 +12,10 @@ export default function CareersPage() {
             <p className="text-xl md:text-2xl opacity-90">Join our team and help bring luxury fragrances to everyone</p>
           </div>
         </div>
-        <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
+        <div className="absolute top-[-370px] bottom-0 right-0 transform translate-y-1/2 hidden md:block">
           <Image 
-            src="/api/placeholder/400/300"
-            width={20}
+            src="/customerservice.svg"
+            width={287}
                 height={20}
             alt="Team member working with fragrances" 
             className="rounded-lg shadow-xl"

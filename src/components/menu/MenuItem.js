@@ -74,6 +74,7 @@ export default function MenuItem(menuItem) {
                 <div onClick={() => setShowPopup(false)} className="fixed inset-0 bg-black/80 flex items-center justify-center">
                     <div onClick={ev => ev.stopPropagation()} className="my-8 bg-white p-4 rounded-lg max-w-md">
                         <div className="overflow-y-scroll pr-1" style={{ maxHeight: 'calc(100vh - 100px)' }}>
+                            <h2 className="text-xl font-bold text-center mb-2">Product Details</h2>
                             <Image src={image} alt={name} width={300} height={200} className="mx-auto" />
                             <h2 className="text-lg font-bold text-center mb-2">{name}</h2>
                             <p className="text-center text-gray-500 text-sm mb-2">{description}</p>
@@ -128,6 +129,16 @@ export default function MenuItem(menuItem) {
                                         +
                                     </button>
                                 </div>
+                            </div>
+
+                            {/* Enhanced Disclaimer section with more visibility */}
+                            <div className="mt-4 mb-4 p-4 bg-gray-100 border-2 border-gray-300 rounded-md shadow-sm">
+                                <h4 className="text-center font-bold text-gray-800 mb-2 text-lg">Our Quality Promise</h4>
+                                <p className="text-[14px] text-gray-700 text-center font-normal leading-relaxed">
+                                    At Olfia USA, we carefully hand-decant our niche fragrance sample vials from original, authentic bottles. 
+                                    While we are not affiliated with the brand owners, we take great care in ensuring each sample vial is 
+                                    handled and packaged to preserve its quality and authenticity.
+                                </p>
                             </div>
 
                             {/* Fixed button container with no extra padding */}

@@ -102,9 +102,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Email Us</h3>
                   <p className="text-gray-600 mb-1">For general inquiries:</p>
-                  <a href="mailto:info@olifia.com" className="text-purple-600 hover:text-purple-800">info@olifia.com</a>
+                  <a href="mailto:info@olifia.com" className="text-purple-600 hover:text-purple-800">olfiausa@gmail.com</a>
                   <p className="text-gray-600 mb-1 mt-2">For customer support:</p>
-                  <a href="mailto:support@olifia.com" className="text-purple-600 hover:text-purple-800">support@olifia.com</a>
+                  <a href="mailto:support@olifia.com" className="text-purple-600 hover:text-purple-800">olfiausa@gmail.com</a>
                 </div>
               </div>
               

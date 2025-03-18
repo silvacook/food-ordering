@@ -1,7 +1,69 @@
+"use client"
+
 import Image from 'next/image';
-import React from 'react';
+import React, { useState } from 'react';
 
 export default function ContactPage() {
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    subject: "",
+    message: ""
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitMessage, setSubmitMessage] = useState("");
+
+  // Handle form input changes
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  // Generate mailto link with form data
+  const generateMailtoLink = () => {
+    const subject = `${formData.subject ? formData.subject : 'Contact Form Inquiry'}`;
+    const body = `
+Name: ${formData.name}
+Email: ${formData.email}
+
+Message:
+${formData.message}
+    `;
+    
+    return `mailto:olfiausa@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    // Open the mailto link
+    window.location.href = generateMailtoLink();
+    
+    // Show success message and reset form
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setSubmitMessage("Opening your email client...");
+      
+      // Reset form after successful submission
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: ""
+      });
+
+      // Clear success message after 5 seconds
+      setTimeout(() => {
+        setSubmitMessage("");
+      }, 5000);
+    }, 1000);
+  };
+
   return (
     <div className="bg-gradient-to-b from-purple-50 to-white min-h-screen">
       {/* Hero section */}
@@ -31,12 +93,15 @@ export default function ContactPage() {
             <h2 className="text-3xl font-semibold text-purple-800 mb-6">Send Us a Message</h2>
             <p className="text-gray-600 mb-8">Have questions about our fragrances or need help finding your perfect scent? Fill out the form below and we&apos;ll get back to you as soon as possible.</p>
             
-            <form className="space-y-6">
+            <form className="space-y-6" onSubmit={handleSubmit}>
               <div>
                 <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Your Name</label>
                 <input 
                   type="text" 
                   id="name" 
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="John Doe"
                 />
@@ -47,6 +112,10 @@ export default function ContactPage() {
                 <input 
                   type="email" 
                   id="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="john@example.com"
                 />
@@ -56,14 +125,17 @@ export default function ContactPage() {
                 <label htmlFor="subject" className="block text-sm font-medium text-gray-700 mb-1">Subject</label>
                 <select 
                   id="subject" 
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                 >
                   <option value="">Please select a subject</option>
-                  <option value="product">Product Inquiry</option>
-                  <option value="order">Order Status</option>
-                  <option value="returns">Returns & Refunds</option>
-                  <option value="recommendations">Fragrance Recommendations</option>
-                  <option value="other">Other</option>
+                  <option value="Product Inquiry">Product Inquiry</option>
+                  <option value="Order Status">Order Status</option>
+                  <option value="Returns & Refunds">Returns & Refunds</option>
+                  <option value="Fragrance Recommendations">Fragrance Recommendations</option>
+                  <option value="Other">Other</option>
                 </select>
               </div>
               
@@ -71,18 +143,30 @@ export default function ContactPage() {
                 <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Your Message</label>
                 <textarea 
                   id="message" 
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
                   rows="6" 
                   className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-purple-500 focus:border-transparent"
                   placeholder="How can we help you today?"
                 ></textarea>
               </div>
               
+              {/* Submit button */}
               <button 
                 type="submit" 
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-md font-medium transition-colors"
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white py-3 px-6 rounded-md font-medium transition-colors disabled:opacity-70"
+                disabled={isSubmitting}
               >
-                Send Message
+                {isSubmitting ? "Opening..." : "Send Message"}
               </button>
+              
+              {/* Success Message */}
+              {submitMessage && (
+                <div className="mt-4 p-3 bg-green-100 text-green-700 rounded-md">
+                  {submitMessage}
+                </div>
+              )}
             </form>
           </div>
           
@@ -102,9 +186,9 @@ export default function ContactPage() {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Email Us</h3>
                   <p className="text-gray-600 mb-1">For general inquiries:</p>
-                  <a href="mailto:info@olifia.com" className="text-purple-600 hover:text-purple-800">olfiausa@gmail.com</a>
+                  <a href="mailto:olfiausa@gmail.com" className="text-purple-600 hover:text-purple-800">olfiausa@gmail.com</a>
                   <p className="text-gray-600 mb-1 mt-2">For customer support:</p>
-                  <a href="mailto:support@olifia.com" className="text-purple-600 hover:text-purple-800">olfiausa@gmail.com</a>
+                  <a href="mailto:olfiausa@gmail.com" className="text-purple-600 hover:text-purple-800">olfiausa@gmail.com</a>
                 </div>
               </div>
               

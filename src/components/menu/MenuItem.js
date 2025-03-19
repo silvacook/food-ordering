@@ -77,7 +77,7 @@ export default function MenuItem(menuItem) {
                             <h2 className="text-xl font-bold text-center mb-2">Product Details</h2>
                             <Image src={image} alt={name} width={300} height={200} className="mx-auto" />
                             <h2 className="text-lg font-bold text-center mb-2">{name}</h2>
-                            <p className="text-center text-gray-500 text-sm mb-2">{description}</p>
+                            <p className="text-left text-gray-500 text-sm mb-2">{description}</p>
                             {sizes.length > 0 && (
                                 <div className="py-2">
                                     <h3 className="text-center text-gray-700">Pick your size</h3>

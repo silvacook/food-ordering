@@ -58,7 +58,7 @@ export default function Home() {
     <>
       <Hero />
       <HomeMenu />
-      <section className="text-center my-16" id="about">
+      <section className="text-left my-16" id="about">
         <SectionHeaders 
           subHeader={"Our story"}
           mainHeader={"About us"}

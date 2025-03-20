@@ -56,18 +56,10 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/careers"
-                    className="text-gray-600 hover:text-gray-900 transition"
-                  >
-                    Careers
-                  </Link>
-                </li>
-                <li>
-                  <Link
                     href="/contact"
                     className="text-gray-600 hover:text-gray-900 transition"
                   >
-                    Contact
+                    Contact Us
                   </Link>
                 </li>
               </ul>
@@ -79,10 +71,10 @@ const Footer = () => {
               <ul className="space-y-3">
                 <li>
                   <Link
-                    href="/blog"
+                    href="/news"
                     className="text-gray-600 hover:text-gray-900 transition"
                   >
-                    Blog
+                      Latest News
                   </Link>
                 </li>
                 <li>
@@ -90,15 +82,7 @@ const Footer = () => {
                     href="/documentation"
                     className="text-gray-600 hover:text-gray-900 transition"
                   >
-                    Documentation
-                  </Link>
-                </li>
-                <li>
-                  <Link
-                    href="/guides"
-                    className="text-gray-600 hover:text-gray-900 transition"
-                  >
-                    Guides
+                    How Does it Work?
                   </Link>
                 </li>
               </ul>

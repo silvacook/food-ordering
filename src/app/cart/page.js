@@ -53,22 +53,40 @@ export default function CartPage() {
     async function proceedToCheckout(ev) {
         ev.preventDefault();
         
+        // Check if all required address fields are filled
+        const requiredFields = ['phone', 'streetAddress', 'city', 'postalCode', 'country'];
+        const missingFields = requiredFields.filter(field => !address[field]);
+        
+        if (missingFields.length > 0) {
+            toast.error(`Please fill in all required address fields`);
+            return;
+        }
+        
         const promise = new Promise((resolve, reject) => {
             fetch("/api/checkout", {
                 method: 'POST',
-                headers: {"Content-Type" : "application/json" },
+                headers: {"Content-Type": "application/json"},
                 body: JSON.stringify({
                     address,
                     cartProducts,
                 })
             }).then(async(response) => {
-                if (response.ok) {
-                    resolve();
+                try {
                     const data = await response.json();
-                    window.location = data.url;
-                } else {
-                    reject();
+                    if (response.ok && data.url) {
+                        window.location.href = data.url;
+                        resolve();
+                    } else {
+                        console.error('Invalid response:', data);
+                        reject(new Error('Invalid response from server'));
+                    }
+                } catch (error) {
+                    console.error('Error processing response:', error);
+                    reject(error);
                 }
+            }).catch(error => {
+                console.error('Fetch error:', error);
+                reject(error);
             });
         });
     

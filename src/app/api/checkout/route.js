@@ -74,5 +74,5 @@ export async function POST(req) {
     ],
   });
 
-  return Response.json(stripeSession.url);
+  return Response.json({ url: stripeSession.url });;
 }

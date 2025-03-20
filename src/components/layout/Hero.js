@@ -45,7 +45,7 @@ export default function Hero() {
                     src="/virals.svg" 
                     fill
                     style={{ objectFit: "contain" }}
-                    alt="Delicious Pizza"
+                    alt="Delicious Fragrance Vital"
                 />
             </div>
         </section>

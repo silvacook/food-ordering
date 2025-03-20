@@ -83,62 +83,6 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* Team section */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-semibold text-[#9e473b] mb-8 text-center">Meet Our Team</h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            {/* Team member 1 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <Image 
-                src="/founder1.svg"
-                width={400}
-                height={500}  
-                alt="Team member" 
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-[#9e473b]">Elena Rodriguez</h3>
-                <p className="text-gray-500 mb-4">Founder & CEO</p>
-                <p className="text-gray-700">Fragrance enthusiast with over 15 years of experience in the luxury perfume industry.</p>
-              </div>
-            </div>
-
-            {/* Team member 2 - Fixed the image display */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <div className="h-64 relative">
-                <Image 
-                  src="/man.svg"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                  alt="Team member" 
-                  className="object-contain"
-                  priority
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-[#9e473b]">Marcus Chen</h3>
-                <p className="text-gray-500 mb-4">Chief Software Developer</p>
-                <p className="text-gray-700">Certified perfumer with a knack for identifying the perfect scent for every personality.</p>
-              </div>
-            </div>
-
-            {/* Team member 3 */}
-            <div className="bg-white rounded-lg shadow-md overflow-hidden">
-              <Image
-                src="/employee.svg"
-                width={400}
-                height={500} 
-                alt="Team member" 
-                className="w-full h-64 object-cover"
-              />
-              <div className="p-6">
-                <h3 className="text-xl font-bold text-[#9e473b]">Sophia Patel</h3>
-                <p className="text-gray-500 mb-4">Customer Experience Manager</p>
-                <p className="text-gray-700">Dedicated to ensuring every customer finds their signature scent with personalized recommendations.</p>
-              </div>
-            </div>
-          </div>
-        </div>
 
         {/* Timeline */}
         <div className="mb-16">

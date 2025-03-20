@@ -137,7 +137,9 @@ export default function MenuItem(menuItem) {
                                 <p className="text-[14px] text-gray-700 text-center font-normal leading-relaxed">
                                     At Olfia USA, we carefully hand-decant our niche fragrance sample vials from original, authentic bottles. 
                                     While we are not affiliated with the brand owners, we take great care in ensuring each sample vial is 
-                                    handled and packaged to preserve its quality and authenticity.
+                                    handled and packaged to preserve its quality and authenticity, while preserving the integrity of the brand. 
+                                    Our authentic 1ml samples come in 1ml glass spray decant for easy dispensing. 
+                                    You will receive one 1ml glass spray vial in a red velvet string bag, not the retail full bottle.
                                 </p>
                             </div>
 

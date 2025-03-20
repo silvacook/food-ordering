@@ -12,15 +12,15 @@ export default function DocumentationPage() {
       <div className="relative bg-gray-800 text-white">
         <div className="max-w-6xl mx-auto px-4 py-16 md:py-20">
           <div className="md:w-2/3">
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">Documentation</h1>
+            <h1 className="text-4xl md:text-5xl font-bold mb-4">How Does it Work?</h1>
             <p className="text-xl md:text-2xl opacity-90">Everything you need to know about our fragrances</p>
           </div>
         </div>
-        <div className="absolute bottom-0 right-0 transform translate-y-1/2 hidden md:block">
+        <div className="absolute bottom-0 right-20 top-[-130px] transform translate-y-1/2 hidden md:block">
           <Image 
-            src="/api/placeholder/400/300"
-            width={400}
-            height={300} 
+            src="/documents.svg"
+            width={130}
+            height={100} 
             alt="Perfume documentation" 
             className="rounded-lg shadow-xl"
           />

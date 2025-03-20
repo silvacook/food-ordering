@@ -66,7 +66,7 @@ export default function TermsOfService() {
         <section className="mb-12">
           <h2 className="text-3xl font-semibold text-blue-800 mb-4">Disclaimer of Warranties</h2>
           <p className="text-gray-700 leading-relaxed">
-            Our services are provided on an "as is" and "as available" basis. We make no warranties regarding the accuracy, reliability, or availability of our services.
+            Our services are provided on an &ldquo;as is&rdquo; and &ldquo;as available&rdquo; basis. We make no warranties regarding the accuracy, reliability, or availability of our services.
           </p>
         </section>
 

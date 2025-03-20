@@ -65,7 +65,7 @@ export default function FragranceNews() {
             <div className="p-6">
               <h2 className="text-2xl font-semibold text-purple-800 mb-2">Reviving Classics</h2>
               <p className="text-gray-700">
-                A modern twist on classic fragrances is gaining momentum, as heritage scents are reimagined for today's market with a fresh perspective.
+                A modern twist on classic fragrances is gaining momentum, as heritage scents are reimagined for today&apos;s market with a fresh perspective.
               </p>
             </div>
           </div>

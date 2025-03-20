@@ -21,7 +21,6 @@ export async function POST(req) {
 
   const stripeLineItems = [];
   for (const cartProduct of cartProducts) {
-
     const productInfo = await MenuItem.findById(cartProduct._id);
 
     let productPrice = productInfo.basePrice;
@@ -42,7 +41,7 @@ export async function POST(req) {
     const productName = cartProduct.name;
 
     stripeLineItems.push({
-      quantity: 1,
+      quantity: cartProduct.quantity || 1,
       price_data: {
         currency: 'USD',
         product_data: {
@@ -57,11 +56,11 @@ export async function POST(req) {
     line_items: stripeLineItems,
     mode: 'payment',
     customer_email: userEmail,
-    success_url: process.env.NEXTAUTH_URL + 'orders/' + orderDoc._id.toString() + '?clear-cart=1',
-    cancel_url: process.env.NEXTAUTH_URL + 'cart?canceled=1',
-    metadata: {orderId:orderDoc._id.toString()},
+    success_url: process.env.NEXTAUTH_URL + '/orders/' + orderDoc._id.toString() + '?clear-cart=1',
+    cancel_url: process.env.NEXTAUTH_URL + '/cart?canceled=1',
+    metadata: {orderId: orderDoc._id.toString()},
     payment_intent_data: {
-      metadata:{orderId:orderDoc._id.toString()},
+      metadata: {orderId: orderDoc._id.toString()},
     },
     shipping_options: [
       {
@@ -74,5 +73,5 @@ export async function POST(req) {
     ],
   });
 
-  return Response.json({ url: stripeSession.url });;
+  return Response.json({ url: stripeSession.url });
 }

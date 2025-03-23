@@ -18,17 +18,24 @@ export async function POST(req) {
         return Response.json({ error: e.message }, { status: 400 });
     }
 
+    // Log all incoming events for debugging
+    console.log("Stripe webhook received event type:", event.type);
+    console.log("Event data:", JSON.stringify(event.data.object, null, 2));
+
+    // Handle Checkout Session completed event
     if (event.type === "checkout.session.completed") {
-        const orderId = event?.data?.object?.metadata?.orderId;
-        const isPaid = event?.data?.object?.payment_status === "paid";
+        const session = event.data.object;
+        const orderId = session?.metadata?.orderId;
+        const isPaid = session?.payment_status === "paid";
         
-        console.log("Webhook received:", { orderId, isPaid, eventType: event.type });
+        console.log("Checkout session completed:", { orderId, isPaid, paymentStatus: session?.payment_status });
         
-        if (isPaid && orderId) {
+        if (orderId) {
             try {
-                const result = await Order.updateOne(
-                    { _id: orderId }, 
-                    { paid: true }
+                const result = await Order.findByIdAndUpdate(
+                    orderId, 
+                    { paid: true },
+                    { new: true }
                 );
                 console.log("Order update result:", result);
             } catch (error) {
@@ -36,7 +43,31 @@ export async function POST(req) {
                 return Response.json({ error: "Database update failed" }, { status: 500 });
             }
         } else {
-            console.log("Order not updated, missing data:", { isPaid, orderId });
+            console.log("Order not updated, missing orderId");
+        }
+    }
+    
+    // Also handle payment_intent.succeeded event
+    if (event.type === "payment_intent.succeeded") {
+        const paymentIntent = event.data.object;
+        const orderId = paymentIntent?.metadata?.orderId;
+        
+        console.log("Payment intent succeeded:", { orderId });
+        
+        if (orderId) {
+            try {
+                const result = await Order.findByIdAndUpdate(
+                    orderId, 
+                    { paid: true },
+                    { new: true }
+                );
+                console.log("Order update result:", result);
+            } catch (error) {
+                console.error("Error updating order:", error);
+                return Response.json({ error: "Database update failed" }, { status: 500 });
+            }
+        } else {
+            console.log("Order not updated, missing orderId in payment intent");
         }
     }
 

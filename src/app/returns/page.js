@@ -9,7 +9,7 @@ const ReturnsPage = () => {
         <div className="bg-gray-50 px-6 py-8 text-center">
           <h1 className="text-3xl font-bold text-gray-800 mb-4">Return Policy</h1>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            At Olifia, we're committed to ensuring your complete satisfaction while maintaining the integrity of our hand-crafted fragrance samples.
+            At Olifia, we&apos;re committed to ensuring your complete satisfaction while maintaining the integrity of our hand-crafted fragrance samples.
           </p>
         </div>
 

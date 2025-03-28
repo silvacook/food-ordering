@@ -23,24 +23,37 @@ const Footer = () => {
               perfumes—perfect for trying before committing to full bottles. Experience luxury fragrances one spritz at a time.
             </p>
             {/* Social icons */}
-            <div className="flex space-x-4">
+            <div className="flex space-x-1">
               <a
                 href="https://instagram.com/olfia_usa"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-gray-600 hover:text-gray-900 transition p-2 bg-gray-50 rounded-full"
               >
-              <Image
-                src="/instagram.svg"  // Path to your custom SVG in the public folder
-                alt="Instagram"
-                width={24}  // Adjust the width to your needs
-                height={24}  // Adjust the height to your needs
-            />
+                <Image
+                  src="/instagram.svg"
+                  alt="Instagram"
+                  width={24}
+                  height={24}
+                />
+              </a>
+              <a
+                href="https://tiktok.com/@olfia_usa"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-gray-600 hover:text-gray-900 transition p-2 bg-gray-50 rounded-full"
+              >
+                <Image
+                  src="/TikTok.svg"
+                  alt="TikTok"
+                  width={24}
+                  height={24}
+                />
               </a>
             </div>
           </div>
 
-          {/* Navigation sections */}
+          {/* Rest of the footer remains the same */}
           <div className="lg:col-span-8 grid grid-cols-1 sm:grid-cols-3 gap-8">
             {/* Company Info */}
             <div className="space-y-4">
@@ -110,10 +123,18 @@ const Footer = () => {
                 </li>
                 <li>
                   <Link
-                    href="/cookies"
+                    href="/shipping"
                     className="text-gray-600 hover:text-gray-900 transition"
                   >
-                    Cookie Policy
+                  Shipping & Packaging
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/returns"
+                    className="text-gray-600 hover:text-gray-900 transition"
+                  >
+                    Returns/Refunds
                   </Link>
                 </li>
               </ul>

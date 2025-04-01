@@ -42,12 +42,16 @@ function AuthLinks({ status, userName }) {
 }
 
 export default function Header() {
-  const session = useSession();
-  const status = session?.status;
-  const userData = session.data?.user;
+  // Fixed: Properly destructure the session object
+  const { data: session, status } = useSession();
+  const userData = session?.user;
   let userName = userData?.name || userData?.email;
   const { cartProducts } = useContext(CartContext);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
+
+  // For debugging
+  console.log("Session status:", status);
+  console.log("User data:", userData);
 
   if (userName && userName.includes(' ')) {
     userName = userName.split(' ')[0];

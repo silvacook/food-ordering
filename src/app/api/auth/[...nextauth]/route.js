@@ -1,12 +1,12 @@
 import clientPromise from "@/libs/mongoConnect";
-import {UserInfo} from "@/models/UserInfo";
+import { UserInfo } from "@/models/UserInfo";
 import bcrypt from "bcrypt";
 import * as mongoose from "mongoose";
-import {User} from '@/models/User';
-import NextAuth, {getServerSession} from "next-auth";
+import { User } from '@/models/User';
+import NextAuth, { getServerSession } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-import { MongoDBAdapter } from "@auth/mongodb-adapter"
+import { MongoDBAdapter } from "@auth/mongodb-adapter";
 
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
@@ -26,19 +26,47 @@ export const authOptions = {
       async authorize(credentials, req) {
         const email = credentials?.email;
         const password = credentials?.password;
-
+        
         mongoose.connect(process.env.MONGO_URL);
-        const user = await User.findOne({email});
+        const user = await User.findOne({ email });
         const passwordOk = user && bcrypt.compareSync(password, user.password);
-
+        
         if (passwordOk) {
-          return user;
+          // Return a properly structured user object with all the fields Next-Auth expects
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.name || email.split('@')[0], // Fallback to username from email if no name
+            image: user.image || null,
+          };
         }
-
-        return null
+        
+        return null;
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user }) {
+      // This will run when a user signs in
+      if (user) {
+        token.id = user.id;
+        token.name = user.name;
+        token.email = user.email;
+        token.image = user.image;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      // Make the user id and other fields available in the session
+      if (session?.user) {
+        session.user.id = token.id;
+        session.user.name = token.name || token.email.split('@')[0];
+        session.user.email = token.email;
+        session.user.image = token.image;
+      }
+      return session;
+    },
+  },
 };
 
 export async function isAdmin() {
@@ -47,7 +75,7 @@ export async function isAdmin() {
   if (!userEmail) {
     return false;
   }
-  const userInfo = await UserInfo.findOne({email:userEmail});
+  const userInfo = await UserInfo.findOne({ email: userEmail });
   if (!userInfo) {
     return false;
   }
@@ -56,4 +84,4 @@ export async function isAdmin() {
 
 const handler = NextAuth(authOptions);
 
-export { handler as GET, handler as POST }
+export { handler as GET, handler as POST };

@@ -11,6 +11,9 @@ import { MongoDBAdapter } from "@auth/mongodb-adapter"
 export const authOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   adapter: MongoDBAdapter(clientPromise),
+  session: {
+    strategy: "jwt", // Explicitly set to use JWT
+  },
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID,
@@ -26,19 +29,47 @@ export const authOptions = {
       async authorize(credentials, req) {
         const email = credentials?.email;
         const password = credentials?.password;
-
+        
         mongoose.connect(process.env.MONGO_URL);
         const user = await User.findOne({email});
         const passwordOk = user && bcrypt.compareSync(password, user.password);
-
+        
         if (passwordOk) {
-          return user;
+          // Format the user object with all necessary properties
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: user.name || email.split('@')[0], // Fallback to username part of email
+            image: user.image || null
+          };
         }
-
+        
         return null
       }
     })
   ],
+  callbacks: {
+    async jwt({ token, user, account }) {
+      // Initial sign in
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name || user.email?.split('@')[0]; // Ensure name is set
+        token.picture = user.image;
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (token && session.user) {
+        session.user.id = token.id || token.sub;
+        session.user.name = token.name || token.email?.split('@')[0];
+        session.user.email = token.email;
+        session.user.image = token.picture;
+      }
+      return session;
+    }
+  },
+  debug: process.env.NODE_ENV === 'development', // Enable debug in development
 };
 
 export async function isAdmin() {

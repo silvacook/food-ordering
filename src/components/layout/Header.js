@@ -2,7 +2,7 @@
 
 import { signOut, useSession } from "next-auth/react";
 import Link from "next/link";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react"; // Added useEffect
 import ShoppingCart from "@/components/icons/ShoppingCart";
 import Bars2 from "@/components/icons/Bars2";
 import { CartContext } from "@/components/AppContext";
@@ -20,7 +20,8 @@ function AuthLinks({ status, userName }) {
         </Link>
         <button
           onClick={() => signOut()}
-          className="bg-[#9e473b] rounded-full text-white px-8 py-2">
+          className="bg-[#9e473b] rounded-full text-white px-8 py-2"
+        >
           Logout
         </button>
       </>
@@ -42,16 +43,22 @@ function AuthLinks({ status, userName }) {
 }
 
 export default function Header() {
-  const session = useSession();
-  const status = session?.status;
-  const userData = session.data?.user;
-  let userName = userData?.name || userData?.email;
+  const { data: session, status } = useSession(); // Destructure session
+  const [userName, setUserName] = useState(null); // Use state to manage userName
   const { cartProducts } = useContext(CartContext);
   const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
-  if (userName && userName.includes(' ')) {
-    userName = userName.split(' ')[0];
-  }
+  useEffect(() => {
+    if (status === 'authenticated' && session?.user) {
+      let name = session.user.name || session.user.email;
+      if (name && name.includes(' ')) {
+        name = name.split(' ')[0];
+      }
+      setUserName(name);
+    } else {
+        setUserName(null);
+    }
+  }, [status, session]); // Run effect when status or session changes
 
   return (
     <header>
